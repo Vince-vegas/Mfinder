@@ -6,9 +6,9 @@ import { genPaginationArray } from '../../Utils/genPaginationArray';
 
 const PagePagination = ({ totalPagination, currentPage, handleClick }) => {
   // Scroll to Top when page clicked
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [currentPage]);
+  // useEffect(() => {
+  //   window.scrollTo(0, 0);
+  // }, [currentPage]);
 
   return (
     <div className="pagination">

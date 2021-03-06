@@ -11,6 +11,8 @@ const fetchTopActors = createAsyncThunk(
 
       const actorsData = await getActors.json();
 
+      // Scroll to Top when Pagination clicked
+      window.scrollTo(0, 0);
       return actorsData;
     } catch (error) {
       throw new Error(error);

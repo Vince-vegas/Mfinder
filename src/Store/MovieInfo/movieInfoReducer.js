@@ -4,6 +4,8 @@ const fetchMovieDetails = createAsyncThunk(
   'movie/FETCH_DETAILS',
   async (detailObj, thunkAPI) => {
     try {
+      // scroll to top when mount
+      window.scrollTo(0, 0);
       // Movie Details
       const getDetail = await fetch(
         `https://api.themoviedb.org/3/movie/${detailObj.id}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US`,

@@ -27,9 +27,6 @@ const MovieInfo = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    // scroll to top when mount
-    window.scrollTo(0, 0);
-    //
     const promDetails = dispatch(fetchMovieDetails({ id }));
     const promSuggested = dispatch(fetchSuggested({ id }));
 

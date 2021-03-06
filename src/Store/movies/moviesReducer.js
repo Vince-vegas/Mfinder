@@ -9,7 +9,7 @@ export const fetchHomeMovies = createAsyncThunk(
         { signal: thunkAPI.signal }
       );
       const data = await getMovies.json();
-
+      window.scrollTo(0, 0);
       return data;
     } catch (error) {
       throw Error('404 test');
@@ -26,12 +26,15 @@ export const fetchGenreMovies = createAsyncThunk(
         { signal: thunkAPI.signal }
       );
       const data = await getMovies.json();
-
+      // Scroll to Top when Pagination clicked
+      window.scrollTo(0, 0);
       return {
         movies: data,
         genreId: moviesObj.genreId,
       };
     } catch (error) {
+      // Scroll to Top when Pagination clicked
+      window.scrollTo(0, 0);
       throw Error('404 test');
     }
   }

@@ -1,4 +1,4 @@
-# Netflixia
+# Mfinder App
 
 The Project is a movie browsing app.
 
