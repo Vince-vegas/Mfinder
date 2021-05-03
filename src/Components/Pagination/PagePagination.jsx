@@ -1,15 +1,10 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import Button from '../buttons/Button';
 import PropTypes from 'prop-types';
 import '../../Styles/pagination.scss';
 import { genPaginationArray } from '../../Utils/genPaginationArray';
 
 const PagePagination = ({ totalPagination, currentPage, handleClick }) => {
-  // Scroll to Top when page clicked
-  // useEffect(() => {
-  //   window.scrollTo(0, 0);
-  // }, [currentPage]);
-
   return (
     <div className="pagination">
       <ul className="pgn-menu">
