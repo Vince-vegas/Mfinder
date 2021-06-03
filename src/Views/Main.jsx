@@ -21,10 +21,10 @@ const Main = () => {
                 target="blank"
               >
                 {' '}
-                The Movie DataBase Api
+                The Movie DataBase API
               </a>{' '}
-              for retrieving movie data to this site. It's goal is to provide
-              the users to browse all upcoming and excitement movies for free.{' '}
+              for retrieving movie data to this site. Its goal is to provide
+              users to browse all upcoming and exciting movies for free.{' '}
               <a
                 href="https://developers.themoviedb.org/3"
                 className="link"
