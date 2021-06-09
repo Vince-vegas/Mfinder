@@ -40,11 +40,11 @@ const Actors = () => {
   }, []);
 
   return (
-    <div className="mn-actors">
-      <div className="container">
-        <h1 className="title mb30">Top 100 Actors</h1>
+    <div className='mn-actors'>
+      <div className='container'>
+        <h1 className='title mb30'>Top 100 Actors</h1>
 
-        <div className="row space-between">
+        <div className='row space-between'>
           {actors.map(({ id, ...otherProps }) => {
             return <ActorCard key={id} {...otherProps} movieId={id} />;
           })}

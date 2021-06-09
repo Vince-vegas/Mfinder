@@ -42,8 +42,8 @@ const MovieInfo = () => {
 
   return (
     <>
-      <div className="mn-item-info">
-        <div className="container">
+      <div className='mn-item-info'>
+        <div className='container'>
           <BackgroundImage backdrop_path={movieDetail.backdrop_path} />
           <Overview
             movieDetails={movieDetail}

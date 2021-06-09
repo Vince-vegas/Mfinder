@@ -31,10 +31,10 @@ const ActorMovies = () => {
   }, []);
 
   return (
-    <div className="main-collections">
-      <div className="container">
-        <div className="search-box">
-          <h1 className="search-title">
+    <div className='main-collections'>
+      <div className='container'>
+        <div className='search-box'>
+          <h1 className='search-title'>
             {actorDetail.name
               ? `${actorDetail.name}'s Movies`
               : 'His/Her movies'}

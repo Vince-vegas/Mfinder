@@ -66,25 +66,25 @@ const Genres = () => {
   }, []);
 
   return (
-    <div className="main-collections">
-      <div className="container">
+    <div className='main-collections'>
+      <div className='container'>
         <SortLayout>
           <TrendList
-            text="Hot"
+            text='Hot'
             handleEvent={sortToPopular}
-            sortValue="popular"
+            sortValue='popular'
             currentSort={sorted}
           />
           <TrendList
-            text="Top Rated"
+            text='Top Rated'
             handleEvent={sortToRated}
-            sortValue="top_rated"
+            sortValue='top_rated'
             currentSort={sorted}
           />
           <TrendList
-            text="Now Playing"
+            text='Now Playing'
             handleEvent={sortToLatest}
-            sortValue="now_playing"
+            sortValue='now_playing'
             currentSort={sorted}
           />
         </SortLayout>

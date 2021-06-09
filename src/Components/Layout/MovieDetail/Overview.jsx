@@ -5,6 +5,7 @@ import YoutubeIcon from '../../../Assets/SvgIcon/YoutubeIcon';
 import YoutubeModal from '../../Modal/YoutubeModal';
 import SubText from './SubText';
 import ContentSpinner from './ContentSpinner';
+import LinkIcon from '../../../Assets/SvgIcon/LinkIcon';
 
 const Overview = (props) => {
   const { trailerKey, movieActors, onWatchTrailer, isPlayTrailer } = props;
@@ -17,17 +18,18 @@ const Overview = (props) => {
     runtime,
     release_date,
     vote_average,
+    homepage,
   } = props.movieDetails;
 
   return (
     <Fragment>
-      <div className="details">
+      <div className='details'>
         {!overview && <ContentSpinner />}
 
         {/* Show Movie Details when overview is fetched */}
         {overview && (
-          <div className="row justify-between info-row">
-            <div className="col-lg-2 col-md-3 img-info">
+          <div className='row justify-between info-row'>
+            <div className='col-lg-2 col-md-3 img-info'>
               <div>
                 <img
                   src={`https://image.tmdb.org/t/p/w300${poster_path}`}
@@ -36,18 +38,18 @@ const Overview = (props) => {
               </div>
             </div>
             {/*  */}
-            <div className="col-lg-7 col-md-6">
-              <div className="content-info">
-                <h2 className="info-title">{title}</h2>
-                <p className="overview mb20">{overview}</p>
-                <div className="other-info">
-                  <div className="row">
-                    <div className="col-md-7">
+            <div className='col-lg-7 col-md-6'>
+              <div className='content-info'>
+                <h2 className='info-title'>{title}</h2>
+                <p className='overview mb20'>{overview}</p>
+                <div className='other-info'>
+                  <div className='row'>
+                    <div className='col-md-7'>
                       {genres && (
                         <SubText
-                          subTitle="Genre"
+                          subTitle='Genre'
                           subText={genres.map((item) => (
-                            <span className="selection" key={item.id}>
+                            <span className='selection' key={item.id}>
                               {item.name}
                             </span>
                           ))}
@@ -55,12 +57,12 @@ const Overview = (props) => {
                       )}
                       {movieActors && (
                         <SubText
-                          subTitle="Starring"
+                          subTitle='Starring'
                           subText={movieActors.slice(0, 5).map((item) => {
                             return (
                               <Link
                                 to={`/actor/movies/${item.id}`}
-                                className="selection starring"
+                                className='selection starring'
                                 key={item.id}
                               >
                                 {item.name}
@@ -71,30 +73,39 @@ const Overview = (props) => {
                       )}
 
                       <SubText
-                        subTitle="Language"
+                        subTitle='Language'
                         subText={original_language}
                       />
                     </div>
-                    <div className="col-md-5">
-                      <SubText subTitle="Duration" subText={`${runtime}mins`} />
-                      <SubText subTitle="Release" subText={release_date} />
-                      <SubText subTitle="Rating" subText={vote_average} />
+                    <div className='col-md-5'>
+                      <SubText subTitle='Duration' subText={`${runtime}mins`} />
+                      <SubText subTitle='Release' subText={release_date} />
+                      <SubText subTitle='Rating' subText={vote_average} />
                     </div>
                   </div>
                 </div>
               </div>
             </div>
             {/*  */}
-            <div className="w-100 col-lg-3 col-md-2">
-              <div className="info-buttons">
-                <button className="btn info-link" onClick={onWatchTrailer}>
-                  <YoutubeIcon />{' '}
-                  <span className="text-link">
+            <div className='w-100 col-lg-3 col-md-2'>
+              <div className='info-buttons'>
+                <button className='btn info-link' onClick={onWatchTrailer}>
+                  <YoutubeIcon />
+                  <span className='text-link'>
                     {trailerKey !== undefined
                       ? 'Watch Trailer'
                       : 'No Trailer Yet'}
                   </span>
                 </button>
+
+                <a
+                  rel='noreferrer'
+                  target='_blank'
+                  href={homepage}
+                  className='btn info-link'
+                >
+                  <LinkIcon /> <span className='text-link'>Visit Site</span>
+                </a>
               </div>
             </div>
           </div>

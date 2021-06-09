@@ -34,10 +34,10 @@ const MovieSearched = (props) => {
   }, []);
 
   return (
-    <div className="main-collections">
-      <div className="container">
-        <div className="search-box">
-          <h1 className="search-title">Search Results</h1>
+    <div className='main-collections'>
+      <div className='container'>
+        <div className='search-box'>
+          <h1 className='search-title'>Search Results</h1>
         </div>
 
         {/* Show Spinner when fetching */}
