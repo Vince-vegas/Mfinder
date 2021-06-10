@@ -17,6 +17,7 @@ import TrendList from '../Components/TrendList';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
 import PagePagination from '../Components/Pagination/PagePagination';
+import Carousel from '../Components/Carousel/Carousel';
 
 const HomeMovies = () => {
   const moviesContext = useSelector((state) => state.moviesState);
@@ -24,16 +25,16 @@ const HomeMovies = () => {
 
   const { sorted, page, movies, isLoading, totalPage } = moviesContext;
 
-  useEffect(() => {
-    // console.log(moviesContext);
-    // the * to conver string into Number
-    const promMovies = dispatch(fetchHomeMovies({ sorted, page }));
+  // useEffect(() => {
+  //   // console.log(moviesContext);
+  //   // the * to conver string into Number
+  //   const promMovies = dispatch(fetchHomeMovies({ sorted, page }));
 
-    // abort fetch when unmount
-    return () => {
-      promMovies.abort();
-    };
-  }, [sorted, page]);
+  //   // abort fetch when unmount
+  //   return () => {
+  //     promMovies.abort();
+  //   };
+  // }, [sorted, page]);
 
   // Sorting functions
   const sortToPopular = () => {
@@ -61,6 +62,7 @@ const HomeMovies = () => {
   return (
     <div className='main-collections'>
       <div className='container'>
+        <Carousel />
         <SortLayout>
           <TrendList
             text='Hot'
@@ -85,7 +87,7 @@ const HomeMovies = () => {
         {/* Show Spinner when fetching */}
         {isLoading && <PageLoad />}
 
-        <CollectMovies moviesArray={movies} />
+        {/* <CollectMovies moviesArray={movies} />
 
         {!isLoading && (
           <PagePagination
@@ -93,7 +95,7 @@ const HomeMovies = () => {
             currentPage={page}
             handleClick={handleSetPage}
           />
-        )}
+        )} */}
       </div>
     </div>
   );
