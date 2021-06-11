@@ -88,11 +88,13 @@ const HomeMovies = () => {
         {isLoading && <PageLoad />}
 
         <CollectMovies moviesArray={movies} />
-        <PagePagination
-          totalPagination={totalPage}
-          currentPage={page}
-          handleClick={handleSetPage}
-        />
+        {movies.length > 0 && (
+          <PagePagination
+            totalPagination={totalPage}
+            currentPage={page}
+            handleClick={handleSetPage}
+          />
+        )}
       </div>
     </div>
   );

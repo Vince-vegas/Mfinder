@@ -7,6 +7,7 @@ import { genPaginationArray } from '../../Utils/genPaginationArray';
 // Creating a pagination
 
 const PagePagination = ({ totalPagination, currentPage, handleClick }) => {
+  console.log(1);
   return (
     <div className='pagination'>
       <ul className='pgn-menu'>
