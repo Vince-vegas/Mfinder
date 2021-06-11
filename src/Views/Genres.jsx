@@ -13,7 +13,7 @@ import {
   fetchGenreMovies,
   onSetPage,
 } from '../Store/movies/moviesReducer';
-import SortLayout from '../Components/Layout/SortLayout';
+import SortLayout from '../Components/SortLayout';
 import TrendList from '../Components/TrendList';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
@@ -27,7 +27,7 @@ const Genres = () => {
   const { sorted, page, movies, genreId, isLoading, totalPage } = moviesContext;
 
   useEffect(() => {
-    // the +id to conver string into Number
+    // the +id to convert string into Number
     const promGenres = dispatch(
       fetchGenreMovies({
         sorted,

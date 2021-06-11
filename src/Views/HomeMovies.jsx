@@ -12,7 +12,7 @@ import {
   onResetState,
   onSetPage,
 } from '../Store/movies/moviesReducer';
-import SortLayout from '../Components/Layout/SortLayout';
+import SortLayout from '../Components/SortLayout';
 import TrendList from '../Components/TrendList';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';

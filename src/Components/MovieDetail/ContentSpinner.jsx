@@ -1,8 +1,8 @@
 import React from 'react';
-import Spinner from '../../ShowLoad/Spinner';
+import Spinner from '../ShowLoad/Spinner';
 
 const ContentSpinner = () => (
-  <div className="mn-showload">
+  <div className='mn-showload'>
     <Spinner
       addCssStyle={{
         position: 'absolute',

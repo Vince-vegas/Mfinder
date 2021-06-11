@@ -10,19 +10,19 @@ export const carouselMovies = [
     vote_average: 8.1,
   },
   {
-    id: '297762',
-    title: 'Wonder Woman',
-    backdrop_path: '/AaABt75ZzfMGrscUR2seabz4PEX.jpg',
-    overview:
-      'An Amazon princess comes to the world of Man in the grips of the First World War to confront the forces of evil and bring an end to human conflict.',
-    vote_average: 7.3,
-  },
-  {
     id: '464052',
     title: 'Wonder Woman 1984',
     backdrop_path: '/srYya1ZlI97Au4jUYAktDe3avyA.jpg',
     overview:
       'A botched store robbery places Wonder Woman in a global battle against a powerful and mysterious ancient force that puts her powers in jeopardy.',
     vote_average: 6.7,
+  },
+  {
+    id: '345940',
+    title: 'The Meg',
+    backdrop_path: '/rH79sB6Nkx4cMW3JzsUy7wK0rhX.jpg',
+    overview:
+      'A deep sea submersible pilot revisits his past fears in the Mariana Trench, and accidentally unleashes the seventy foot ancestor of the Great White Shark believed to be extinct.',
+    vote_average: 6.2,
   },
 ];

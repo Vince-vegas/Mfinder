@@ -1,11 +1,11 @@
 /* eslint-disable array-callback-return */
 import React, { Fragment } from 'react';
 import { Link } from 'react-router-dom';
-import YoutubeIcon from '../../../Assets/SvgIcon/YoutubeIcon';
-import YoutubeModal from '../../Modal/YoutubeModal';
+import YoutubeIcon from '../../Assets/SvgIcon/YoutubeIcon';
+import YoutubeModal from '../Modal/YoutubeModal';
 import SubText from './SubText';
 import ContentSpinner from './ContentSpinner';
-import LinkIcon from '../../../Assets/SvgIcon/LinkIcon';
+import LinkIcon from '../../Assets/SvgIcon/LinkIcon';
 
 const Overview = (props) => {
   const { trailerKey, movieActors, onWatchTrailer, isPlayTrailer } = props;

@@ -17,21 +17,21 @@ const Navbar = () => {
   };
 
   return (
-    <div className="nav-header">
-      <div className="nav-holder">
-        <div className="nav-container">
+    <div className='nav-header'>
+      <div className='nav-holder'>
+        <div className='nav-container'>
           {/* TOGGLE MENU ICON */}
           <button
             style={{ background: 'transparent' }}
-            className="toggle-menu"
+            className='toggle-menu'
             onClick={onShowOpts}
           >
-            <MenuIcon className="toggle-svg" />
+            <MenuIcon className='toggle-svg' />
           </button>
 
           {/* LOGO COM */}
-          <div className="logo-box">
-            <Link to="/" className="logo">
+          <div className='logo-box'>
+            <Link to='/' className='logo'>
               <Logo />
             </Link>
           </div>

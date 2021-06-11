@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
-import BackgroundImage from '../Components/Layout/MovieDetail/BackgroundImage';
-import Overview from '../Components/Layout/MovieDetail/Overview';
-import SuggestedMovies from '../Components/Layout/MovieDetail/SuggestedMovies';
+import BackgroundImage from '../Components/MovieDetail/BackgroundImage';
+import Overview from '../Components/MovieDetail/Overview';
+import SuggestedMovies from '../Components/MovieDetail/SuggestedMovies';
 import {
   fetchMovieDetails,
   fetchSuggested,
