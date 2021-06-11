@@ -41,6 +41,7 @@ const Genres = () => {
       promGenres.abort();
     };
   }, [sorted, page, genreId]);
+  console.log(movies);
 
   // Sorting functions
   const sortToPopular = () => {
@@ -94,7 +95,7 @@ const Genres = () => {
 
         <CollectMovies moviesArray={movies} />
 
-        {!isLoading && (
+        {movies.length > 0 && (
           <PagePagination
             totalPagination={totalPage}
             currentPage={page}
