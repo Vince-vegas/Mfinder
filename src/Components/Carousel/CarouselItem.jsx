@@ -14,7 +14,7 @@ const CarouselItem = ({ title, backdrop_path, overview, vote_average, id }) => {
         <h1 className='title'>{title}</h1>
         <p>{overview}</p>
 
-        <Link target='_blank' to={`/title/${id}`} className='btn btn-carousel'>
+        <Link to={`/title/${id}`} className='btn btn-carousel'>
           Visit
         </Link>
       </div>
