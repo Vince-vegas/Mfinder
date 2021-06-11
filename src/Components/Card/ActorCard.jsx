@@ -13,10 +13,10 @@ const ActorCard = ({ name, profile_path, movieId }) => {
 
   return (
     <Fade big>
-      <div className="actor-item mb30">
-        <Link to={`/actor/movies/${movieId}`} className="actor-link">
-          <div className="actor-box">
-            <div className="actor-image">
+      <div className='actor-item mb30'>
+        <Link to={`/actor/movies/${movieId}`} className='actor-link'>
+          <div className='actor-box'>
+            <div className='actor-image'>
               <Observer onChange={handleChange}>
                 <img
                   alt={name}
@@ -24,7 +24,7 @@ const ActorCard = ({ name, profile_path, movieId }) => {
                 />
               </Observer>
             </div>
-            <div className="sub-content">
+            <div className='sub-content'>
               <h3>{name}</h3>
             </div>
           </div>

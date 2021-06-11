@@ -1,6 +1,7 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
-const CarouselItem = ({ title, backdrop_path, overview }) => {
+const CarouselItem = ({ title, backdrop_path, overview, vote_average, id }) => {
   return (
     <div
       style={{
@@ -9,8 +10,13 @@ const CarouselItem = ({ title, backdrop_path, overview }) => {
       className='carousel-item'
     >
       <div className='content'>
-        <h1>{title}</h1>
+        <span>{vote_average}</span>
+        <h1 className='title'>{title}</h1>
         <p>{overview}</p>
+
+        <Link target='_blank' to={`/title/${id}`} className='btn btn-carousel'>
+          Visit
+        </Link>
       </div>
     </div>
   );
