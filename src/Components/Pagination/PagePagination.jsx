@@ -4,13 +4,15 @@ import PropTypes from 'prop-types';
 import '../../Styles/pagination.scss';
 import { genPaginationArray } from '../../Utils/genPaginationArray';
 
+// Creating a pagination
+
 const PagePagination = ({ totalPagination, currentPage, handleClick }) => {
   return (
-    <div className="pagination">
-      <ul className="pgn-menu">
+    <div className='pagination'>
+      <ul className='pgn-menu'>
         {genPaginationArray(totalPagination).map((id) => {
           return (
-            <li key={id} className="pgn-list">
+            <li key={id} className='pgn-list'>
               <Button
                 className={
                   currentPage === id ? 'pgn-link pgn-link--active' : 'pgn-link'
