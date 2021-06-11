@@ -41,7 +41,6 @@ const Genres = () => {
       promGenres.abort();
     };
   }, [sorted, page, genreId]);
-  console.log(movies);
 
   // Sorting functions
   const sortToPopular = () => {
