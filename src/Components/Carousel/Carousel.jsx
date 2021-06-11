@@ -3,7 +3,6 @@ import { carouselMovies } from '../../Store/CarouselMovies/CarouselReducers';
 import CarouselItem from './CarouselItem';
 
 const Carousel = () => {
-  const [willClick, setWillClick] = useState(true);
   const [itemId, setItemId] = useState(0);
   const carouselRef = useRef(null);
 

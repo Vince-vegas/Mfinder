@@ -25,16 +25,16 @@ const HomeMovies = () => {
 
   const { sorted, page, movies, isLoading, totalPage } = moviesContext;
 
-  // useEffect(() => {
-  //   // console.log(moviesContext);
-  //   // the * to conver string into Number
-  //   const promMovies = dispatch(fetchHomeMovies({ sorted, page }));
+  useEffect(() => {
+    // console.log(moviesContext);
+    // the * to conver string into Number
+    const promMovies = dispatch(fetchHomeMovies({ sorted, page }));
 
-  //   // abort fetch when unmount
-  //   return () => {
-  //     promMovies.abort();
-  //   };
-  // }, [sorted, page]);
+    // abort fetch when unmount
+    return () => {
+      promMovies.abort();
+    };
+  }, [sorted, page]);
 
   // Sorting functions
   const sortToPopular = () => {
@@ -87,15 +87,12 @@ const HomeMovies = () => {
         {/* Show Spinner when fetching */}
         {isLoading && <PageLoad />}
 
-        {/* <CollectMovies moviesArray={movies} />
-
-        {!isLoading && (
-          <PagePagination
-            totalPagination={totalPage}
-            currentPage={page}
-            handleClick={handleSetPage}
-          />
-        )} */}
+        <CollectMovies moviesArray={movies} />
+        <PagePagination
+          totalPagination={totalPage}
+          currentPage={page}
+          handleClick={handleSetPage}
+        />
       </div>
     </div>
   );
