@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { carouselMovies } from '../../Store/CarouselMovies/CarouselReducers';
 import CarouselItem from './CarouselItem';
+import '../../Styles/carousel.scss';
 
 const Carousel = () => {
   const [itemId, setItemId] = useState(0);
