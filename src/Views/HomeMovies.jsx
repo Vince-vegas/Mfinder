@@ -62,27 +62,32 @@ const HomeMovies = () => {
   return (
     <div className='main-collections'>
       <div className='container'>
-        <Carousel />
-        <SortLayout>
-          <TrendList
-            text='Hot'
-            handleEvent={sortToPopular}
-            sortValue='popular'
-            currentSort={sorted}
-          />
-          <TrendList
-            text='Top Rated'
-            handleEvent={sortToRated}
-            sortValue='top_rated'
-            currentSort={sorted}
-          />
-          <TrendList
-            text='Now Playing'
-            handleEvent={sortToLatest}
-            sortValue='now_playing'
-            currentSort={sorted}
-          />
-        </SortLayout>
+        {/* Show Carousel and SortLayout at first homepage component mount */}
+        {movies.length > 0 && (
+          <>
+            <Carousel />
+            <SortLayout>
+              <TrendList
+                text='Hot'
+                handleEvent={sortToPopular}
+                sortValue='popular'
+                currentSort={sorted}
+              />
+              <TrendList
+                text='Top Rated'
+                handleEvent={sortToRated}
+                sortValue='top_rated'
+                currentSort={sorted}
+              />
+              <TrendList
+                text='Now Playing'
+                handleEvent={sortToLatest}
+                sortValue='now_playing'
+                currentSort={sorted}
+              />
+            </SortLayout>
+          </>
+        )}
 
         {/* Show Spinner when fetching */}
         {isLoading && <PageLoad />}
