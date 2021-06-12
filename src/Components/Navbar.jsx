@@ -35,14 +35,14 @@ const Navbar = () => {
               <Logo />
             </Link>
           </div>
-          {/*  */}
 
           {/* MENUS */}
           <Menus />
-          {/*  */}
 
+          {/* Search Movie  */}
           <NavSearch />
 
+          {/* Responsive  */}
           <NavSearchMobile />
         </div>
       </div>

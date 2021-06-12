@@ -33,27 +33,27 @@ const NavSearch = () => {
 
   return (
     <Fragment>
-      <div className="nav-search">
-        <form className="search-form" onSubmit={onSubmitSearch}>
-          <div className="search-input">
+      <div className='nav-search'>
+        <form className='search-form' onSubmit={onSubmitSearch}>
+          <div className='search-input'>
             <input
-              name="name"
-              type="text"
-              placeholder="Search movies...."
-              autoComplete="off"
-              className="sm-input"
+              name='name'
+              type='text'
+              placeholder='Search movies....'
+              autoComplete='off'
+              className='sm-input'
               value={searchVal}
               onChange={handleSearch}
             />
           </div>
-          <button type="submit">
+          <button type='submit'>
             <SearchIcon />
           </button>
         </form>
       </div>
 
       {/* NAV SEARCH ON MOBILE */}
-      <div className="toggle-search toggle-menu" onClick={onShowMobileSearch}>
+      <div className='toggle-search toggle-menu' onClick={onShowMobileSearch}>
         <SearchIcon />
       </div>
     </Fragment>

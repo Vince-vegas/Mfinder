@@ -2,6 +2,7 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
+import SearchedError from '../Components/SearchedError';
 import PageLoad from '../Components/ShowLoad/PageLoad';
 import {
   fetchSearchedMovie,
@@ -32,6 +33,10 @@ const MovieSearched = (props) => {
       dispatch(onResetState());
     };
   }, []);
+
+  if (!titleQuery) {
+    return <SearchedError />;
+  }
 
   return (
     <div className='main-collections'>
