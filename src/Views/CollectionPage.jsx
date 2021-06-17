@@ -23,7 +23,7 @@ const CollectionPage = () => {
       setCollection({});
       setMovie([]);
     };
-  }, []);
+  }, [id]);
 
   return (
     <div className='main-collection'>
