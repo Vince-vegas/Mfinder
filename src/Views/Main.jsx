@@ -23,7 +23,7 @@ const Main = () => {
                 {' '}
                 The Movie DataBase API
               </a>{' '}
-              for retrieving movies and collection. It's goal is to provide the
+              for retrieving movies and collections. It's goal is to provide the
               users to browse all upcoming and exciting movies for free.{' '}
               <a
                 href='https://developers.themoviedb.org/3'
