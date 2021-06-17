@@ -15,15 +15,15 @@ const Menus = () => {
 
   return (
     <div className={showMenus ? 'nav-center opts-block' : 'nav-center'}>
-      <div className="nav-menu">
-        <li className="nav-list">
-          <Link className="nav-link" to="/home" onClick={handleCloseMenus}>
+      <div className='nav-menu'>
+        <li className='nav-list'>
+          <Link className='nav-link' to='/home' onClick={handleCloseMenus}>
             Home
           </Link>
         </li>
         <GenresList genres={genres} />
-        <li className="nav-list">
-          <Link className="nav-link" to="/actors" onClick={handleCloseMenus}>
+        <li className='nav-list'>
+          <Link className='nav-link' to='/actors' onClick={handleCloseMenus}>
             People
           </Link>
         </li>

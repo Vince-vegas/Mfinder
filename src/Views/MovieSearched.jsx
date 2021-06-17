@@ -11,8 +11,11 @@ import {
 import '../Styles/genres-layout.scss';
 
 const MovieSearched = (props) => {
+  // get query
   const query = new URLSearchParams(props.location.search);
   const titleQuery = query.get('q').trim();
+  //
+
   const movieSearchState = useSelector((state) => state.movieSearched);
   const dispatch = useDispatch();
 

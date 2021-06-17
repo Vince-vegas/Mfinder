@@ -1,7 +1,7 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const fetchSearchedMovie = createAsyncThunk(
-  'search-movie/FETCH_SEARCH',
+  'movie-search/FETCH_SEARCH',
   async (movieName, thunkAPI) => {
     try {
       const getSearchMovie = await fetch(
@@ -11,6 +11,16 @@ const fetchSearchedMovie = createAsyncThunk(
       );
 
       const searchedData = await getSearchMovie.json();
+
+      // return empty array when no movie data
+      // tmdb api return an error object when no search query
+      if (searchedData.hasOwnProperty('errors')) {
+        return {
+          movie: {
+            results: [],
+          },
+        };
+      }
 
       return {
         movie: searchedData,

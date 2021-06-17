@@ -46,26 +46,26 @@ const NavSearchMobile = () => {
         showMobileSearch ? 'search-expand show-search' : 'search-expand'
       }
     >
-      <form className="search-form" onSubmit={onSubmitSearch}>
-        <button type="submit" className="icon-box">
+      <form className='search-form' onSubmit={onSubmitSearch}>
+        <button type='submit' className='icon-box'>
           <SearchIcon />
         </button>
 
         {/* Mobile Search Input */}
-        <div className="search-input">
+        <div className='search-input'>
           <input
-            name="name"
-            type="text"
-            placeholder="Search movies...."
-            autoComplete="off"
-            className="lg-input"
+            name='name'
+            type='text'
+            placeholder='Search movies....'
+            autoComplete='off'
+            className='lg-input'
             value={searchVal}
             onChange={handleSearch}
           />
         </div>
 
-        <div className="icon-box" onClick={onCloseMobileSearch}>
-          <ExitIcon className="ex-icon" />
+        <div className='icon-box' onClick={onCloseMobileSearch}>
+          <ExitIcon className='ex-icon' />
         </div>
       </form>
     </div>

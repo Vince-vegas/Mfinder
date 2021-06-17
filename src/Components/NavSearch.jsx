@@ -21,6 +21,7 @@ const NavSearch = () => {
 
     if (searchVal.length > 0) {
       dispatch(onSetSearch(searchVal));
+      // route /search
       history.push(`/search?q=${searchVal}`);
       setSearchVal('');
     }

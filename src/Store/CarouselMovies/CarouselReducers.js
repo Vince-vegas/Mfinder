@@ -18,11 +18,11 @@ export const carouselMovies = [
     vote_average: 6.7,
   },
   {
-    id: '345940',
-    title: 'The Meg',
-    backdrop_path: '/rH79sB6Nkx4cMW3JzsUy7wK0rhX.jpg',
+    id: '775996',
+    title: 'Outside the Wire',
+    backdrop_path: '/lOSdUkGQmbAl5JQ3QoHqBZUbZhC.jpg',
     overview:
-      'A deep sea submersible pilot revisits his past fears in the Mariana Trench, and accidentally unleashes the seventy foot ancestor of the Great White Shark believed to be extinct.',
-    vote_average: 6.2,
+      'In the near future, a drone pilot is sent into a deadly militarized zone and must work with an android officer to locate a doomsday device.',
+    vote_average: 6.4,
   },
 ];
