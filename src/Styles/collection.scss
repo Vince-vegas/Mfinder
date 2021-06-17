@@ -1,0 +1,59 @@
+.main-collection {
+  padding: 80px 0;
+}
+
+.collection-header {
+  height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  background-position: 50% 30%;
+  background-size: cover;
+  background-repeat: no-repeat;
+
+  .content {
+    width: 100%;
+    text-align: center;
+    background-color: rgba(33, 55, 250, 0.7);
+    padding: 20px 30px;
+
+    p {
+      font-size: 18px;
+    }
+  }
+}
+
+.collection-card {
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .image {
+    flex-basis: 30%;
+  }
+
+  .content {
+    padding: 10px;
+
+    p {
+      margin-bottom: 25px;
+    }
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .collection-card {
+    .content {
+      h1 {
+        font-size: 25px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+
+      .btn {
+        display: block;
+      }
+    }
+  }
+}

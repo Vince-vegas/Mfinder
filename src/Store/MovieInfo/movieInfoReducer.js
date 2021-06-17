@@ -45,6 +45,7 @@ const fetchMovieDetails = createAsyncThunk(
         trailerKey,
         movieActors: movieActors.cast,
         movieId: detailObj.id,
+        movieCollection: detailData?.belongs_to_collection,
       };
     } catch (error) {
       throw new Error('404', error);
@@ -88,6 +89,7 @@ const movieSlice = createSlice({
     isDetailsLoad: false,
     movieDetail: {},
     movieActors: [],
+    movieCollection: null,
     trailerKey: '',
     isPlayTrailer: false,
     moviesSuggested: [],
@@ -108,6 +110,7 @@ const movieSlice = createSlice({
       state.trailerKey = '';
       state.isPlayTrailer = false;
       state.moviesSuggested = [];
+      state.movieCollection = null;
       state.isSuggestLoad = false;
       state.noSuggested = false;
       state.error = {};
@@ -127,6 +130,7 @@ const movieSlice = createSlice({
       state.movieDetail = action.payload.details;
       state.trailerKey = action.payload.trailerKey.results[0].key;
       state.movieActors = action.payload.movieActors;
+      state.movieCollection = action.payload.movieCollection;
     },
     [fetchSuggested.pending]: (state) => {
       state.isSuggestLoad = true;

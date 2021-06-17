@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
 import BackgroundImage from '../Components/MovieDetail/BackgroundImage';
+import Collection from '../Components/MovieDetail/Collection';
 import Overview from '../Components/MovieDetail/Overview';
 import SuggestedMovies from '../Components/MovieDetail/SuggestedMovies';
 import {
@@ -18,6 +19,7 @@ const MovieInfo = () => {
   const movieDetailState = useSelector((state) => state.movieDetails);
   const {
     movieDetail,
+    movieCollection,
     movieActors,
     trailerKey,
     moviesSuggested,
@@ -54,6 +56,15 @@ const MovieInfo = () => {
           />
         </div>
       </div>
+
+      {movieCollection && (
+        <Collection
+          name={movieCollection.name}
+          background={movieCollection.backdrop_path}
+          collectionId={movieCollection.id}
+        />
+      )}
+
       <SuggestedMovies
         isSuggestLoad={isSuggestLoad}
         suggestMovies={moviesSuggested}

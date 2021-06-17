@@ -95,6 +95,26 @@
   }
 }
 
+// movie collection
+.collection {
+  height: 240px;
+  border-radius: 3px;
+  padding: 20px 15px;
+  background-position: 50% 20%;
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  align-items: center;
+
+  .btn {
+    background-color: #e74c3c;
+
+    &:hover {
+      background-color: #c0392b;
+    }
+  }
+}
+
 // suggest movies
 .mn-suggested {
   .suggested-row {
@@ -128,6 +148,15 @@
     }
     .info-buttons {
       margin-top: 20px;
+    }
+  }
+
+  // collection
+  .collection {
+    .holder {
+      h1 {
+        font-size: 22px;
+      }
     }
   }
 }
