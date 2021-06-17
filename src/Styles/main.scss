@@ -31,4 +31,8 @@ body {
 .btn {
   letter-spacing: 1.5px;
   @include btn($min-width: 200px, $background: #3498db);
+
+  &:hover {
+    background-color: #1ba4ff;
+  }
 }

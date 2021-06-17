@@ -102,7 +102,7 @@ const Overview = (props) => {
                   rel='noreferrer'
                   target='_blank'
                   href={homepage}
-                  className='btn info-link'
+                  className='btn info-link btn-site'
                 >
                   <LinkIcon /> <span className='text-link'>Visit Site</span>
                 </a>
