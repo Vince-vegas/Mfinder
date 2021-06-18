@@ -4,6 +4,7 @@ const LinkIcon = () => {
   return (
     <svg
       stroke='currentColor'
+      fill='transparent'
       viewBox='0 0 24 24'
       xmlns='http://www.w3.org/2000/svg'
       className='icons'
