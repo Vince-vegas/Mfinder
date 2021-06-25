@@ -1,11 +1,7 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 import ReviewHolder from '../ReviewHolder';
 
 const Reviews = (props) => {
-  const reviews = useSelector((state) => state.movieDetails.reviews);
-  console.log(reviews);
-
   return (
     <div className='main-reviews'>
       <h1>Reviews</h1>

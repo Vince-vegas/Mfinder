@@ -44,7 +44,7 @@ const MovieInfo = () => {
       dispatch(resetState());
     };
   }, [id]);
-
+  console.log(reviews);
   return (
     <>
       <div className='mn-item-info'>
