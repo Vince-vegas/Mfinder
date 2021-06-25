@@ -5,7 +5,9 @@ import { useParams } from 'react-router-dom';
 import BackgroundImage from '../Components/MovieDetail/BackgroundImage';
 import Collection from '../Components/MovieDetail/Collection';
 import Overview from '../Components/MovieDetail/Overview';
+import Reviews from '../Components/MovieDetail/Reviews';
 import SuggestedMovies from '../Components/MovieDetail/SuggestedMovies';
+
 import {
   fetchMovieDetails,
   fetchSuggested,
@@ -25,6 +27,7 @@ const MovieInfo = () => {
     moviesSuggested,
     isSuggestLoad,
     noSuggested,
+    reviews,
   } = movieDetailState;
   const dispatch = useDispatch();
 
@@ -57,19 +60,23 @@ const MovieInfo = () => {
         </div>
       </div>
 
-      {movieCollection && (
-        <Collection
-          name={movieCollection.name}
-          background={movieCollection.backdrop_path}
-          collectionId={movieCollection.id}
-        />
-      )}
+      <div className='container'>
+        {movieCollection && (
+          <Collection
+            name={movieCollection.name}
+            background={movieCollection.backdrop_path}
+            collectionId={movieCollection.id}
+          />
+        )}
 
-      <SuggestedMovies
-        isSuggestLoad={isSuggestLoad}
-        suggestMovies={moviesSuggested}
-        noSuggested={noSuggested}
-      />
+        <SuggestedMovies
+          isSuggestLoad={isSuggestLoad}
+          suggestMovies={moviesSuggested}
+          noSuggested={noSuggested}
+        />
+
+        {reviews && <Reviews reviews={reviews} />}
+      </div>
     </>
   );
 };

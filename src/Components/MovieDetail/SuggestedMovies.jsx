@@ -7,19 +7,17 @@ const SuggestedMovies = ({ suggestMovies, isSuggestLoad, noSuggested }) => {
   return (
     <>
       <div className='mn-suggested'>
-        <div className='container'>
-          <div className='suggest-title'>
-            <h1>Suggested Movies</h1>
-          </div>
-          <div className='row justify-between suggested-row'>
-            {/* Show Spinner when fetching suggested movies */}
-            {isSuggestLoad && <ContentSpinner />}
+        <div className='suggest-title'>
+          <h1>Suggested Movies</h1>
+        </div>
+        <div className='row justify-between suggested-row'>
+          {/* Show Spinner when fetching suggested movies */}
+          {isSuggestLoad && <ContentSpinner />}
 
-            <CollectSuggested movieArray={suggestMovies} />
+          <CollectSuggested movieArray={suggestMovies} />
 
-            {/* Show Text when no suggested movies */}
-            {noSuggested && <SuggestError />}
-          </div>
+          {/* Show Text when no suggested movies */}
+          {noSuggested && <SuggestError />}
         </div>
       </div>
     </>

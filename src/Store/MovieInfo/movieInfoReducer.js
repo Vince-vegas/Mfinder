@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 const fetchMovieDetails = createAsyncThunk(
   'movie/FETCH_DETAILS',
@@ -40,12 +41,19 @@ const fetchMovieDetails = createAsyncThunk(
         trailerKey.results.push({ key: 'no-trailer-key' });
       }
 
+      // movie reviews
+      const getReviews = await axios(
+        `https://api.themoviedb.org/3/movie/${detailObj.id}/reviews?api_key=${process.env.REACT_APP_TMDB_ID}`
+      );
+      const reviewData = await getReviews.data;
+
       return {
         details: detailData,
         trailerKey,
         movieActors: movieActors.cast,
         movieId: detailObj.id,
         movieCollection: detailData?.belongs_to_collection,
+        reviews: reviewData.results,
       };
     } catch (error) {
       throw new Error('404', error);
@@ -95,6 +103,7 @@ const movieSlice = createSlice({
     moviesSuggested: [],
     isSuggestLoad: false,
     noSuggested: false,
+    reviews: [],
     error: {},
   },
   reducers: {
@@ -113,6 +122,7 @@ const movieSlice = createSlice({
       state.movieCollection = null;
       state.isSuggestLoad = false;
       state.noSuggested = false;
+      state.reviews = [];
       state.error = {};
     },
   },
@@ -131,6 +141,7 @@ const movieSlice = createSlice({
       state.trailerKey = action.payload.trailerKey.results[0].key;
       state.movieActors = action.payload.movieActors;
       state.movieCollection = action.payload.movieCollection;
+      state.reviews = action.payload.reviews;
     },
     [fetchSuggested.pending]: (state) => {
       state.isSuggestLoad = true;
