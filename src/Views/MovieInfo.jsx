@@ -75,7 +75,7 @@ const MovieInfo = () => {
           noSuggested={noSuggested}
         />
 
-        {reviews && <Reviews reviews={reviews} />}
+        {reviews.length > 0 && <Reviews reviews={reviews} />}
       </div>
     </>
   );
