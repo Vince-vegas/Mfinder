@@ -12,7 +12,11 @@ const ReviewHolder = ({ author, created_at, content, avatar_path }) => {
       <div className='review-box' onClick={onShowComment}>
         <div className='review-image'>
           <img
-            src={`${avatar_path ? avatar_path.substring(1) : ''}`}
+            src={`${
+              avatar_path && avatar_path.includes('https')
+                ? avatar_path.substring(1)
+                : 'https://www.gravatar.com/avatar/1cacf1bc403efca2e7a58bcfa9574e4d?s=200&r=pg&d=mm'
+            }`}
             alt={author}
           />
         </div>
@@ -20,7 +24,9 @@ const ReviewHolder = ({ author, created_at, content, avatar_path }) => {
       </div>
       <div className={`${showComment ? 'comment show-comment' : 'comment'}`}>
         <div className='text'>
-          <p className='created-at'>{created_at}</p>
+          <p className='created-at'>
+            {new Date(created_at).toLocaleDateString()}
+          </p>
           <p>{content}</p>
         </div>
       </div>
