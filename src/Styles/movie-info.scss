@@ -251,6 +251,7 @@
     max-height: 0;
     transition: all 0.5s cubic-bezier(0.66, 0.41, 0.43, 1.02);
     background-color: #323637;
+    overflow-y: scroll;
 
     .created-at {
       font-size: 14px;
@@ -265,7 +266,7 @@
   }
 
   .show-comment {
-    max-height: 1000px;
+    max-height: 800px;
   }
 }
 
