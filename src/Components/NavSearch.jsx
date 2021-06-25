@@ -19,12 +19,10 @@ const NavSearch = () => {
   const onSubmitSearch = (e) => {
     e.preventDefault();
 
-    if (searchVal.length > 0) {
-      dispatch(onSetSearch(searchVal));
-      // route /search
-      history.push(`/search?q=${searchVal}`);
-      setSearchVal('');
-    }
+    dispatch(onSetSearch(searchVal));
+    // route /search
+    history.push(`/search?q=${searchVal}`);
+    setSearchVal('');
   };
 
   const onShowMobileSearch = () => {

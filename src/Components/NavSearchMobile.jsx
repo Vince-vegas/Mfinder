@@ -29,15 +29,13 @@ const NavSearchMobile = () => {
   const onSubmitSearch = (e) => {
     e.preventDefault();
 
-    if (searchVal.length > 0) {
-      dispatch(onSetSearch(searchVal));
-      history.push(`/search?q=${searchVal}`);
+    dispatch(onSetSearch(searchVal));
+    history.push(`/search?q=${searchVal}`);
 
-      // reset nav handler state
-      dispatch(resetNavHandler());
-      // reset search input state
-      setSearchVal('');
-    }
+    // reset nav handler state
+    dispatch(resetNavHandler());
+    // reset search input state
+    setSearchVal('');
   };
 
   return (
