@@ -15,7 +15,7 @@ const ReviewHolder = ({ author, created_at, content, avatar_path }) => {
             src={`${
               avatar_path && avatar_path.includes('https')
                 ? avatar_path.substring(1)
-                : 'https://www.gravatar.com/avatar/1cacf1bc403efca2e7a58bcfa9574e4d?s=200&r=pg&d=mm'
+                : '/images/gravatar-img.png'
             }`}
             alt={author}
           />
