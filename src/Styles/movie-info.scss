@@ -359,6 +359,16 @@
 }
 
 @media screen and (max-width: 600px) {
+  // reviews
+  .review-container {
+    .comment {
+      .text {
+        padding: 20px;
+      }
+    }
+  }
+
+  // youtube
   .embed-container {
     .icon-holder {
       width: 25px;
