@@ -7,7 +7,7 @@ export const carouselMovies = [
     backdrop_path: '/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg',
     overview:
       'In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet.',
-    vote_average: 8.1,
+    vote_average: 8,
   },
   {
     id: '464052',
