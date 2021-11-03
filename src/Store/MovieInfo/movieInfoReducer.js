@@ -49,7 +49,7 @@ const fetchMovieDetails = createAsyncThunk(
 
       return {
         details: detailData,
-        trailerKey,
+        trailerKey: trailerKey.results[1].key,
         movieActors: movieActors.cast,
         movieId: detailObj.id,
         movieCollection: detailData?.belongs_to_collection,
@@ -75,8 +75,6 @@ const fetchSuggested = createAsyncThunk(
 
       // set NoSuggested Movies when suggested movie is not implemented on database
       if (data.results.length < 1) {
-        console.log(thunkAPI);
-
         thunkAPI.dispatch(NO_SUGGESTED());
       }
 
@@ -138,7 +136,7 @@ const movieSlice = createSlice({
       state.isDetailsLoad = false;
       state.movieId = action.payload.movieId;
       state.movieDetail = action.payload.details;
-      state.trailerKey = action.payload.trailerKey.results[2].key;
+      state.trailerKey = action.payload.trailerKey;
       state.movieActors = action.payload.movieActors;
       state.movieCollection = action.payload.movieCollection;
       state.reviews = action.payload.reviews;
