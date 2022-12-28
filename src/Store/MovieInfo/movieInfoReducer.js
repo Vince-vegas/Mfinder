@@ -49,7 +49,7 @@ const fetchMovieDetails = createAsyncThunk(
 
       return {
         details: detailData,
-        trailerKey: trailerKey.results[1].key,
+        trailerKey: trailerKey.results[trailerKey.results.length - 1].key,
         movieActors: movieActors.cast,
         movieId: detailObj.id,
         movieCollection: detailData?.belongs_to_collection,
