@@ -5,9 +5,15 @@ const fetchSearchedMovie = createAsyncThunk(
   async (movieName, thunkAPI) => {
     try {
       const getSearchMovie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US&query=${movieName}&page=1&include_adult=false
+        `https://api.themoviedb.org/3/search/movie?language=en-US&query=${movieName}&page=1&include_adult=false
     `,
-        { signal: thunkAPI.signal }
+        {
+          signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
+        }
       );
 
       const searchedData = await getSearchMovie.json();

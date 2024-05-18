@@ -9,29 +9,41 @@ const fetchMovieDetails = createAsyncThunk(
       window.scrollTo(0, 0);
       // Movie Details
       const getDetail = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US`,
+        `https://api.themoviedb.org/3/movie/${detailObj.id}?language=en-US`,
         {
           signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
         }
       );
       const detailData = await getDetail.json();
 
       // Youtube Trailer Key
       const getTrailerKey = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/videos?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US
+        `https://api.themoviedb.org/3/movie/${detailObj.id}/videos?language=en-US
     `,
         {
           signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
         }
       );
       const trailerKey = await getTrailerKey.json();
 
       // People at Movie
       const getPeople = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/credits?api_key=${process.env.REACT_APP_TMDB_ID}
+        `https://api.themoviedb.org/3/movie/${detailObj.id}/credits
     `,
         {
           signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
         }
       );
       const movieActors = await getPeople.json();
@@ -43,7 +55,13 @@ const fetchMovieDetails = createAsyncThunk(
 
       // movie reviews
       const getReviews = await axios(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/reviews?api_key=${process.env.REACT_APP_TMDB_ID}`
+        `https://api.themoviedb.org/3/movie/${detailObj.id}/reviews`
+        , {
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
+        }
       );
       const reviewData = await getReviews.data;
 
@@ -66,9 +84,13 @@ const fetchSuggested = createAsyncThunk(
   async (detailsObj, thunkAPI) => {
     try {
       const movies = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailsObj.id}/similar?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US&page=1`,
+        `https://api.themoviedb.org/3/movie/${detailsObj.id}/similar?language=en-US&page=1`,
         {
           signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
         }
       );
       const data = await movies.json();

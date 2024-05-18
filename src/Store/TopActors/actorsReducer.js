@@ -5,8 +5,14 @@ const fetchTopActors = createAsyncThunk(
   async (page, thunkAPI) => {
     try {
       const getActors = await fetch(
-        `https://api.themoviedb.org/3/person/popular?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US&page=${page}`,
-        { signal: thunkAPI.signal }
+        `https://api.themoviedb.org/3/person/popular?language=en-US&page=${page}`,
+        { 
+          signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
+        }
       );
 
       const actorsData = await getActors.json();

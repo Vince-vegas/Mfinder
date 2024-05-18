@@ -5,8 +5,11 @@ export const fetchHomeMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/movie/${moviesObj.sorted}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US&page=${moviesObj.page}`,
-        { signal: thunkAPI.signal }
+        `https://api.themoviedb.org/3/movie/${moviesObj.sorted}?language=en-US&page=${moviesObj.page}`,
+        { signal: thunkAPI.signal, headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+        }}
       );
       const data = await getMovies.json();
       window.scrollTo(0, 0);
@@ -22,8 +25,11 @@ export const fetchGenreMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/movie/${moviesObj.sorted}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US&page=${moviesObj.pageId}&with_genres=${moviesObj.genreId}`,
-        { signal: thunkAPI.signal }
+        `https://api.themoviedb.org/3/discover/movie?${moviesObj.sorted}&language=en-US&page=${moviesObj.pageId}&with_genres=${moviesObj.genreId}`,
+        { signal: thunkAPI.signal, headers: {
+          'Content-type': 'application/json',
+          'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+        }}
       );
       const data = await getMovies.json();
       // Scroll to Top when Pagination clicked

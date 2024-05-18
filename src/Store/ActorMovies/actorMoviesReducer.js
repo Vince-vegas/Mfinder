@@ -5,14 +5,26 @@ const fetchActorMovies = createAsyncThunk(
   async (collectionId, thunkAPI) => {
     try {
       const onFetchMovies = await fetch(
-        `https://api.themoviedb.org/3/person/${collectionId}/movie_credits?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US`,
-        { signal: thunkAPI.signal }
+        `https://api.themoviedb.org/3/person/${collectionId}/movie_credits?language=en-US`,
+        { 
+          signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
+         }
       );
       const moviesData = await onFetchMovies.json();
 
       const onFetchActorDetail = await fetch(
         `https://api.themoviedb.org/3/person/${collectionId}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US`,
-        { signal: thunkAPI.signal }
+        { 
+          signal: thunkAPI.signal,
+          headers: {
+            'Content-type': 'application/json',
+            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
+          }
+         }
       );
       const actorDetailData = await onFetchActorDetail.json();
 
