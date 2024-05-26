@@ -17,7 +17,7 @@ const fetchActorMovies = createAsyncThunk(
       const moviesData = await onFetchMovies.json();
 
       const onFetchActorDetail = await fetch(
-        `https://api.themoviedb.org/3/person/${collectionId}?api_key=${process.env.REACT_APP_TMDB_ID}&language=en-US`,
+        `https://api.themoviedb.org/3/person/${collectionId}?language=en-US`,
         { 
           signal: thunkAPI.signal,
           headers: {
