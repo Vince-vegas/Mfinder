@@ -12,7 +12,6 @@ export const fetchHomeMovies = createAsyncThunk(
         }}
       );
       const data = await getMovies.json();
-      window.scrollTo(0, 0);
       return data;
     } catch (error) {
       throw Error('404 test');
