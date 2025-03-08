@@ -6,7 +6,7 @@ export const fetchHomeMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${moviesObj.page}&sort_by=${moviesObj.sorted}`,
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=${moviesObj.page}&sort_by=${moviesObj.sorted}`,
         { signal: thunkAPI.signal, headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
@@ -25,7 +25,7 @@ export const fetchGenreMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${moviesObj.pageId}&sort_by=${moviesObj.sorted}&with_genres=${moviesObj.genreId}`,
+        `https://api.themoviedb.org/3/discover/movie?include_adult=false&language=en-US&page=${moviesObj.pageId}&sort_by=${moviesObj.sorted}&with_genres=${moviesObj.genreId}`,
         { signal: thunkAPI.signal, headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
