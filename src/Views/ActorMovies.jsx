@@ -19,6 +19,7 @@ const ActorMovies = () => {
 
   useEffect(() => {
     const promActorMovies = dispatch(fetchActorMovies(+id));
+    window.scroll(0, 0)
 
     // reset the state when unmount
 
