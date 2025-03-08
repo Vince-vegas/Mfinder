@@ -6,9 +6,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useParams } from 'react-router-dom';
 
 import {
-  onSortPopular,
-  onSortRated,
-  onSortLatest,
   onResetState,
   fetchGenreMovies,
   onSetPage,
@@ -41,16 +38,6 @@ const Genres = () => {
     };
   }, [sorted, page, genreId]);
 
-  // Sorting functions
-  const sortToPopular = () => {
-    dispatch(onSortPopular());
-  };
-  const sortToRated = () => {
-    dispatch(onSortRated());
-  };
-  const sortToLatest = () => {
-    dispatch(onSortLatest());
-  };
   // ====================
 
   const handleSetPage = (id) => {
