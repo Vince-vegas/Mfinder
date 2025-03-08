@@ -1,4 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
+import { movieSortValue } from '../../contants/movieSortValue';
 
 export const fetchHomeMovies = createAsyncThunk(
   'movies/FETCH_MOVIES',
@@ -50,7 +51,7 @@ const moviesSlice = createSlice({
   initialState: {
     movies: [],
     isLoading: false,
-    sorted: 'popularity.desc',
+    sorted: movieSortValue.popularity,
     page: 1,
     genreId: 28,
     totalPage: 5,
@@ -58,15 +59,15 @@ const moviesSlice = createSlice({
   },
   reducers: {
     SORTBY_POPULAR: (state) => {
-      state.sorted = 'popularity.desc';
+      state.sorted = movieSortValue.popularity;
       state.page = 1;
     },
     SORTBY_RATED: (state) => {
-      state.sorted = 'vote_count.desc';
+      state.sorted = movieSortValue.top_rated;
       state.page = 1;
     },
     SORTBY_LATEST: (state) => {
-      state.sorted = 'primary_release_date.desc';
+      state.sorted = movieSortValue.now_playing;
       state.page = 1;
     },
     SET_PAGE: (state, action) => {
@@ -77,7 +78,7 @@ const moviesSlice = createSlice({
     },
     resetState: (state) => {
       state.isLoading = false;
-      state.sorted = 'popularity.desc';
+      state.sorted = movieSortValue.popularity;
       state.movies = [];
       state.page = 1;
       state.genreId = 28;

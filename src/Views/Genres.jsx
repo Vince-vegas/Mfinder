@@ -13,11 +13,10 @@ import {
   fetchGenreMovies,
   onSetPage,
 } from '../Store/movies/moviesReducer';
-import SortLayout from '../Components/SortLayout';
-import TrendList from '../Components/TrendList';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
 import PagePagination from '../Components/Pagination/PagePagination';
+import SortMoviesUI from '../Components/SortMoviesUI';
 
 const Genres = () => {
   const { id } = useParams();
@@ -68,26 +67,7 @@ const Genres = () => {
   return (
     <div className='main-collections'>
       <div className='container'>
-        <SortLayout>
-          <TrendList
-            text='Hot'
-            handleEvent={sortToPopular}
-            sortValue='popular'
-            currentSort={sorted}
-          />
-          <TrendList
-            text='Top Rated'
-            handleEvent={sortToRated}
-            sortValue='top_rated'
-            currentSort={sorted}
-          />
-          <TrendList
-            text='Now Playing'
-            handleEvent={sortToLatest}
-            sortValue='now_playing'
-            currentSort={sorted}
-          />
-        </SortLayout>
+        <SortMoviesUI />
 
         {/* Show Spinner when fetching */}
         {isLoading && <PageLoad />}

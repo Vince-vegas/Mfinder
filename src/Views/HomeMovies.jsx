@@ -6,18 +6,14 @@ import { useSelector, useDispatch } from 'react-redux';
 
 import {
   fetchHomeMovies,
-  onSortPopular,
-  onSortRated,
-  onSortLatest,
   onResetState,
   onSetPage,
 } from '../Store/movies/moviesReducer';
-import SortLayout from '../Components/SortLayout';
-import TrendList from '../Components/TrendList';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
 import PagePagination from '../Components/Pagination/PagePagination';
 import Carousel from '../Components/Carousel/Carousel';
+import SortMoviesUI from '../Components/SortMoviesUI';
 
 const HomeMovies = () => {
   const moviesContext = useSelector((state) => state.moviesState);
@@ -36,16 +32,6 @@ const HomeMovies = () => {
     };
   }, [sorted, page]);
 
-  // Sorting functions
-  const sortToPopular = () => {
-    dispatch(onSortPopular());
-  };
-  const sortToRated = () => {
-    dispatch(onSortRated());
-  };
-  const sortToLatest = () => {
-    dispatch(onSortLatest());
-  };
   // ====================
 
   const handleSetPage = (id) => {
@@ -62,30 +48,11 @@ const HomeMovies = () => {
   return (
     <div className='main-collections'>
       <div className='container'>
-        {/* Show Carousel and SortLayout at first homepage component mount */}
+        {/* Show Carousel and SortMoviesUI at first homepage component mount */}
         {movies.length > 0 && (
           <>
             <Carousel />
-            <SortLayout>
-              <TrendList
-                text='Hot'
-                handleEvent={sortToPopular}
-                sortValue='popular'
-                currentSort={sorted}
-              />
-              <TrendList
-                text='Top Rated'
-                handleEvent={sortToRated}
-                sortValue='top_rated'
-                currentSort={sorted}
-              />
-              <TrendList
-                text='Now Playing'
-                handleEvent={sortToLatest}
-                sortValue='now_playing'
-                currentSort={sorted}
-              />
-            </SortLayout>
+            <SortMoviesUI />
           </>
         )}
 
