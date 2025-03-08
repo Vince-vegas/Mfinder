@@ -5,7 +5,7 @@ export const fetchHomeMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/movie/${moviesObj.sorted}?language=en-US&page=${moviesObj.page}`,
+        `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${moviesObj.page}&sort_by=${moviesObj.sorted}`,
         { signal: thunkAPI.signal, headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
@@ -24,7 +24,7 @@ export const fetchGenreMovies = createAsyncThunk(
   async (moviesObj, thunkAPI) => {
     try {
       const getMovies = await fetch(
-        `https://api.themoviedb.org/3/discover/movie?${moviesObj.sorted}&language=en-US&page=${moviesObj.pageId}&with_genres=${moviesObj.genreId}`,
+        `https://api.themoviedb.org/3/discover/movie?include_adult=true&include_video=false&language=en-US&page=${moviesObj.pageId}&sort_by=${moviesObj.sorted}&with_genres=${moviesObj.genreId}`,
         { signal: thunkAPI.signal, headers: {
           'Content-type': 'application/json',
           'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
@@ -50,7 +50,7 @@ const moviesSlice = createSlice({
   initialState: {
     movies: [],
     isLoading: false,
-    sorted: 'popular',
+    sorted: 'popularity.desc',
     page: 1,
     genreId: 28,
     totalPage: 5,
@@ -58,15 +58,15 @@ const moviesSlice = createSlice({
   },
   reducers: {
     SORTBY_POPULAR: (state) => {
-      state.sorted = 'popular';
+      state.sorted = 'popularity.desc';
       state.page = 1;
     },
     SORTBY_RATED: (state) => {
-      state.sorted = 'top_rated';
+      state.sorted = 'vote_count.desc';
       state.page = 1;
     },
     SORTBY_LATEST: (state) => {
-      state.sorted = 'now_playing';
+      state.sorted = 'primary_release_date.desc';
       state.page = 1;
     },
     SET_PAGE: (state, action) => {
@@ -77,7 +77,7 @@ const moviesSlice = createSlice({
     },
     resetState: (state) => {
       state.isLoading = false;
-      state.sorted = 'popular';
+      state.sorted = 'popularity.desc';
       state.movies = [];
       state.page = 1;
       state.genreId = 28;
