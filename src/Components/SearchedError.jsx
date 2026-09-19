@@ -4,7 +4,7 @@ const SearchedError = () => {
   return (
     <div className='searched-error'>
       <h1>
-        Something wrong when fetching data. Fill the search box with movie title
+        What are you looking for? Enter a movie title to start exploring.
       </h1>
     </div>
   );
