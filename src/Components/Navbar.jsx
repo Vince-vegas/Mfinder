@@ -7,7 +7,6 @@ import { toggleShowMenus } from '../Store/NavHandler/navHandlerReducer';
 import '../Styles/navbar.scss';
 import Menus from './Menus';
 import NavSearch from './NavSearch';
-import NavSearchMobile from './NavSearchMobile';
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -41,9 +40,6 @@ const Navbar = () => {
 
           {/* Search Movie  */}
           <NavSearch />
-
-          {/* Responsive  */}
-          <NavSearchMobile />
         </div>
       </div>
     </div>

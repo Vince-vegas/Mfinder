@@ -62,12 +62,6 @@
     }
   }
 
-  .toggle-search {
-    .search-icon {
-      width: 25px;
-    }
-  }
-
   .logo-box {
     max-width: 110px;
 
@@ -395,7 +389,7 @@
     }
 
     .logo-box {
-      margin: auto;
+      display: none;
     }
 
     .nav-center {
@@ -407,10 +401,6 @@
       padding-top: 10px;
       margin: 0;
       background: #1e2129;
-    }
-    
-    .nav-search {
-      display: none;
     }
   }
 
@@ -479,33 +469,18 @@
       flex: 1 0 30%;
     }
   }
-}
 
-// NAVIGATION EVENTS CLASS HANDLER
-.search-expand {
-  display: none;
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: #fff;
-  max-width: 100%;
-  z-index: 100;
-
-  .icon-box {
-    display: flex;
-    align-items: center;
-    padding: 15px 20px;
-    @extend %user-select-none;
-
-    .ex-icon {
-      @extend %pointer-event-none;
-      height: 20px;
-      width: 20px;
+  .nav-search {
+   .movie-arrow {
+      display: none;
+    }
+    
+    .dot {
+      margin: 0 2px;
     }
   }
 }
+
 .show-search {
   display: block;
 }

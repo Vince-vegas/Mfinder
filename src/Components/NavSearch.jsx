@@ -1,17 +1,10 @@
-import React, { useState, Fragment, useCallback, useRef, useEffect } from 'react';
+import React, { useState, Fragment, useCallback, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
 import { toggleMobileSearch } from '../Store/NavHandler/navHandlerReducer';
 import { fetchSearchedMovie, onSetSearch, onResetState } from '../Store/NavSearch/searchReducer';
-
-const debounce = (func, delay) => {
-  let timer;
-  return (...args) => {
-    clearTimeout(timer)
-    timer = setTimeout(() => func(...args), delay)
-  }
-}
+import { debounce } from '../Utils/debounce';
 
 const NavSearch = () => {
   // =======================
@@ -42,11 +35,12 @@ const NavSearch = () => {
     dispatch(onResetState())
   }
 
-  const handleSearchDebounce = useCallback(debounce((value) => {
-    dispatch(fetchSearchedMovie(value))
-    setIsLoading(false)
-    // setShowSelection(true)
-  }, 1000), [])
+  const handleSearchDebounce = useMemo(() => {
+    return debounce((value) => {
+      dispatch(fetchSearchedMovie(value))
+      setIsLoading(false)
+    }, 1000)
+  }, [])
 
   const handleSearch = (e) => {
     const { value } = e.target;
@@ -62,7 +56,6 @@ const NavSearch = () => {
     // route /search
     history.push(`/search?q=${searchVal}`);
     setSearchVal('')
-    // setShowSelection(false)
   };
 
   const onShowMobileSearch = () => {
@@ -164,11 +157,6 @@ const NavSearch = () => {
             </Link>
           </div>
         )}
-      </div>
-
-      {/* NAV SEARCH ON MOBILE */}
-      <div className='toggle-search toggle-menu' onClick={onShowMobileSearch}>
-        <SearchIcon />
       </div>
     </Fragment>
   );
