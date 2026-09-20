@@ -57,10 +57,6 @@ const NavSearch = () => {
     history.push(`/search?q=${searchVal}`);
     setSearchVal('')
   };
-
-  const onShowMobileSearch = () => {
-    dispatch(toggleMobileSearch());
-  };
   // ==================================
 
   useEffect(() => {
