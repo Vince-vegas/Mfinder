@@ -30,7 +30,6 @@ const NavSearch = () => {
   const resetSearchInput = () => {
     setShowSelection(false)
     setSearchVal('');
-    onResetState()
     dispatch(onResetState())
   }
 
@@ -54,7 +53,7 @@ const NavSearch = () => {
     dispatch(onSetSearch(searchVal));
     // route /search
     history.push(`/search?q=${searchVal}`);
-    setSearchVal('')
+    resetSearchInput()
   };
   // ==================================
 
@@ -93,8 +92,8 @@ const NavSearch = () => {
             {isLoading && <span className="search-spinner"></span>}
             {searchVal && (
               <button type="button" className="reset-search" onClick={resetSearchInput}>
-                <svg className='exit-icon' data-slot="icon" fill="none" stroke-width="3.0" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M6 18 18 6M6 6l12 12"></path>
+                <svg className='exit-icon' data-slot="icon" fill="none" strokeWidth="3.0" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"></path>
                 </svg>
               </button>
             )}
