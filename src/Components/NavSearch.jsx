@@ -40,7 +40,7 @@ const NavSearch = () => {
     dispatch(onSetSearch(searchVal));
     // route /search
     history.push(`/search?q=${searchVal}`);
-    setSearchVal('');
+    resetSearchInput()
   };
   // ==================================
 
