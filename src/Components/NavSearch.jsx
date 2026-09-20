@@ -58,18 +58,18 @@ const NavSearch = () => {
   // ==================================
 
   useEffect(() => {
- const handleClickOutside = (e) => {
-    if (!searchRef.current?.contains(e.target)) {
-      setShowSelection(false);
-    }
-  };
+    const handleClickOutside = (e) => {
+      if (!searchRef.current?.contains(e.target)) {
+        setShowSelection(false);
+      }
+    };
 
-  document.addEventListener('mousedown', handleClickOutside);
+    document.addEventListener('mousedown', handleClickOutside);
 
-  return () => {
-    document.removeEventListener('mousedown', handleClickOutside);
-  };
-}, []);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, []);
 
   return (
     <Fragment>
