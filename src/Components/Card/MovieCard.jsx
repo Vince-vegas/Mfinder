@@ -25,7 +25,7 @@ const MovieCard = ({ vote_average, poster_path, original_title, paramsId }) => {
               </Observer>
             </div>
             <span className="mv-rated">
-              <p>{vote_average}</p>
+              <p>{Number(vote_average).toFixed(1)}</p>
             </span>
             <p className="mv-title fw500">{original_title}</p>
           </div>

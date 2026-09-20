@@ -80,7 +80,7 @@ const Overview = (props) => {
                     <div className='col-md-5'>
                       <SubText subTitle='Duration' subText={`${runtime}mins`} />
                       <SubText subTitle='Release' subText={release_date} />
-                      <SubText subTitle='Rating' subText={vote_average} />
+                      <SubText subTitle='Rating' subText={Number(vote_average).toFixed(1)} />
                     </div>
                   </div>
                 </div>
