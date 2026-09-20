@@ -89,7 +89,6 @@ const NavSearch = () => {
               value={searchVal}
               onChange={handleSearch}
               onFocus={handleShowCollection}
-              // onBlur={handleIsNotFocused}
             />
             {isLoading && <span className="search-spinner"></span>}
             {searchVal && (
