@@ -1,8 +1,7 @@
-import React, { useState, Fragment, useRef, useEffect, useMemo } from 'react';
+import { useState, Fragment, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
-import { toggleMobileSearch } from '../Store/NavHandler/navHandlerReducer';
 import { fetchSearchedMovie, onSetSearch, onResetState } from '../Store/NavSearch/searchReducer';
 import { debounce } from '../Utils/debounce';
 
