@@ -2,26 +2,22 @@ import { useState, Fragment, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
-import { fetchSearchedMovie, onSetSearch, onResetState } from '../Store/NavSearch/searchReducer';
-import { debounce } from '../Utils/debounce';
+import { onSetSearch } from '../Store/NavSearch/searchReducer';
+import { useGetMovieSelection } from '../hooks/useGetMovieSelection';
 
 const NavSearch = () => {
   // =======================
   const history = useHistory();
   const searchRef = useRef(null)
   const [searchVal, setSearchVal] = useState('');
-  const [isLoading, setIsLoading] = useState(false)
   const [showSelection, setShowSelection] = useState(false)
-
-  const movieSearchState = useSelector((state) => state.movieSearched);
   const { genres } = useSelector((state) => state.navHandlers);
 
-  const { searchedMovie } = movieSearchState;
   const dispatch = useDispatch();
 
   // TMDB v3 returns up to 20 results, limit the displayed suggestions to 4 on the client.
   // TMDB doesn't provide a result limit for this endpoint yet
-  const moviesToDisplay = searchedMovie.slice(0, 4)
+  const { moviesToDisplay, isLoading, cancelSearching } = useGetMovieSelection(searchVal)
 
   const handleShowCollection = () => {
     setShowSelection(true)
@@ -29,22 +25,13 @@ const NavSearch = () => {
 
   const resetSearchInput = () => {
     setShowSelection(false)
-    setSearchVal('');
-    dispatch(onResetState())
+    setSearchVal("")
+    cancelSearching()
   }
-
-  const handleSearchDebounce = useMemo(() => {
-    return debounce((value) => {
-      dispatch(fetchSearchedMovie(value))
-      setIsLoading(false)
-    }, 1000)
-  }, [dispatch])
 
   const handleSearch = (e) => {
     const { value } = e.target;
-    setIsLoading(true)
     setSearchVal(value);
-    handleSearchDebounce(value)
   };
 
   const onSubmitSearch = (e) => {
@@ -53,7 +40,7 @@ const NavSearch = () => {
     dispatch(onSetSearch(searchVal));
     // route /search
     history.push(`/search?q=${searchVal}`);
-    resetSearchInput()
+    setSearchVal('');
   };
   // ==================================
 
