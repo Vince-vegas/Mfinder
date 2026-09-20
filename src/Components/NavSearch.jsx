@@ -7,8 +7,8 @@ import { debounce } from '../Utils/debounce';
 
 const NavSearch = () => {
   // =======================
-  let history = useHistory();
-  let searchRef = useRef(null)
+  const history = useHistory();
+  const searchRef = useRef(null)
   const [searchVal, setSearchVal] = useState('');
   const [isLoading, setIsLoading] = useState(false)
   const [showSelection, setShowSelection] = useState(false)
