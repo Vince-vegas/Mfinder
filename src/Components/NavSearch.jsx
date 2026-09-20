@@ -1,4 +1,4 @@
-import React, { useState, Fragment, useCallback, useRef, useEffect, useMemo } from 'react';
+import React, { useState, Fragment, useRef, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
@@ -40,7 +40,7 @@ const NavSearch = () => {
       dispatch(fetchSearchedMovie(value))
       setIsLoading(false)
     }, 1000)
-  }, [])
+  }, [dispatch])
 
   const handleSearch = (e) => {
     const { value } = e.target;
