@@ -4,6 +4,7 @@ import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
 import { onSetSearch } from '../Store/NavSearch/searchReducer';
 import { useGetMovieSelection } from '../hooks/useGetMovieSelection';
+import { onCloseMenus } from '../Store/NavHandler/navHandlerReducer';
 
 const NavSearch = () => {
   // =======================
@@ -19,8 +20,9 @@ const NavSearch = () => {
   // TMDB doesn't provide a result limit for this endpoint yet
   const { moviesToDisplay, isLoading, cancelSearching } = useGetMovieSelection(searchVal)
 
-  const handleShowCollection = () => {
+  const handleEnteringSearch = () => {
     setShowSelection(true)
+    dispatch(onCloseMenus());
   }
 
   const resetSearchInput = () => {
@@ -74,7 +76,7 @@ const NavSearch = () => {
               className='sm-input'
               value={searchVal}
               onChange={handleSearch}
-              onFocus={handleShowCollection}
+              onFocus={handleEnteringSearch}
             />
             {isLoading && <span className="search-spinner"></span>}
             {searchVal && (

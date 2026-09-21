@@ -18,7 +18,7 @@ const Routes = () => {
     <Fragment>
       <Switch>
         <Route exact path='/' component={Main} />
-        <Route exact path='/home' component={HomeMovies} key='l20r' />
+        <Route exact path='/discover' component={HomeMovies} key='l20r' />
         <Route exact path='/genre/:id' component={Genres} key='g40r' />
         <Route exact path='/title/:id' component={MovieInfo} />
         <Route exact path='/collection/:id' component={CollectionPage} />

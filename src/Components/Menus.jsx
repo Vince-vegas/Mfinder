@@ -1,4 +1,3 @@
-import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { onCloseMenus } from '../Store/NavHandler/navHandlerReducer';
@@ -17,8 +16,13 @@ const Menus = () => {
     <div className={showMenus ? 'nav-center opts-block' : 'nav-center'}>
       <div className='nav-menu'>
         <li className='nav-list'>
-          <Link className='nav-link' to='/home' onClick={handleCloseMenus}>
+          <Link className='nav-link' to='/' onClick={handleCloseMenus}>
             Home
+          </Link>
+        </li>
+        <li className='nav-list'>
+          <Link className='nav-link' to='/discover' onClick={handleCloseMenus}>
+            Discover
           </Link>
         </li>
         <GenresList genres={genres} />
