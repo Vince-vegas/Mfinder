@@ -47,6 +47,7 @@
       font-size: 18px;
       letter-spacing: 2px;
       padding: 15px;
+      margin: auto;
       transition: all 0.3s ease-out;
 
       &:hover {
@@ -56,8 +57,20 @@
   }
 }
 
+@media screen and (max-width: 550px) {
+  .mn-homepage {
+    .hp-btn {
+      max-width: 300px;
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .mn-homepage {
+    h1 {
+      font-size: 30px;
+    }
+
     .hp-discover {
       .hp-btn {
         font-size: 16px;
@@ -65,6 +78,7 @@
     }
   }
 }
+
 
 @media screen and (min-width: 768px) {
   .mn-homepage {
