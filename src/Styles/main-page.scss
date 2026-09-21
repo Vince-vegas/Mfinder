@@ -1,6 +1,32 @@
 // MAIN HOMEPAGE
 
 .mn-homepage {
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+
+  .highlight {
+    color: #FF285A;
+  }
+
+  h1 {
+    font-size: 38px;
+    font-weight: bold;
+  }
+
+  h2 {
+    text-transform: uppercase;
+    font-size: 16px;
+    padding-bottom: 0;
+  }
+
+  .sub-text {
+    color: #c4c4c4;
+    font-size: 18px;
+    margin-bottom: 30px;
+  }
+
   .hp-row {
     height: 100vh;
     flex-wrap: nowrap;
@@ -16,7 +42,7 @@
 
     .hp-btn {
       display: block;
-      background-color: #e15b64;
+      background-color: #FF285A;
       font-weight: 400;
       font-size: 18px;
       letter-spacing: 2px;
@@ -28,33 +54,10 @@
       }
     }
   }
-
-  .hp-content {
-    max-width: 450px;
-    text-align: center;
-    padding: 10px;
-    border-radius: 5px;
-    background: #fff;
-    border: 7px solid transparent;
-    border-left-color: #19b5fe;
-    margin: 15px;
-
-    p {
-      color: #4a4a4a;
-      font-size: 22px;
-      font-weight: 500;
-    }
-    .link {
-      color: #57bbff;
-    }
-  }
 }
 
 @media screen and (max-width: 768px) {
   .mn-homepage {
-    .hp-content {
-      max-width: 460px;
-    }
     .hp-discover {
       .hp-btn {
         font-size: 16px;
@@ -65,9 +68,6 @@
 
 @media screen and (min-width: 768px) {
   .mn-homepage {
-    .hp-content {
-      max-width: 670px;
-    }
     .hp-discover {
       min-width: 500px;
     }
@@ -78,12 +78,6 @@
   .mn-homepage {
     .hp-logo {
       min-width: 200px;
-    }
-
-    .hp-content {
-      p {
-        font-size: 18px;
-      }
     }
   }
 }

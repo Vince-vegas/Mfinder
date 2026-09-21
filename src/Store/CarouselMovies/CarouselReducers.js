@@ -4,7 +4,7 @@ export const carouselMovies = [
   {
     id: '399566',
     title: 'Godzilla vs. Kong',
-    backdrop_path: '/inJjDhCjfhh3RtrJWBmmDqeuSYC.jpg',
+    backdrop_path: '/wWqTMWkEw6HouLd1zPZbZWxtAPr.jpg',
     overview:
       'In a time when monsters walk the Earth, humanity’s fight for its future sets Godzilla and Kong on a collision course that will see the two most powerful forces of nature on the planet.',
     vote_average: 8,

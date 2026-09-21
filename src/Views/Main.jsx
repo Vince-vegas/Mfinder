@@ -4,35 +4,16 @@ import '../Styles/main-page.scss';
 
 const Main = () => {
   return (
-    <div className='mn-homepage'>
+    <div className='mn-homepage' style={{backgroundImage: "url(/images/background-movie.jpg)"}}>
       <div className='container'>
         <div className='row align-center justify-center hp-row'>
-          <div className='hp-discover mb50'>
+          <div className='hp-discover'>
+            <h2 className='highlight sub-intro-text'>Find your next favorite</h2>
+            <h1 className='main-intro-text'>Search. <span className='highlight'>Discover.</span> Watch.</h1>
+            <p className='sub-text'>Search for any movie, and get instant suggestions.</p>
             <Link to='/home' className='btn hp-btn'>
               Discover Movies
             </Link>
-          </div>
-          <div className='hp-content'>
-            <p>
-              Discover the latest and top movies worldwide. This website uses
-              <a
-                href='https://developers.themoviedb.org/3'
-                className='link'
-                target='blank'
-              >
-                {' '}
-                The Movie DataBase API
-              </a>{' '}
-              for retrieving movies and collections. It's goal is to provide the
-              users to browse all upcoming and exciting movies for free.{' '}
-              <a
-                href='https://developers.themoviedb.org/3'
-                className='link'
-                target='blank'
-              >
-                Learn more.
-              </a>
-            </p>
           </div>
         </div>
       </div>

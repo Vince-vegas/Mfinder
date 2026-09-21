@@ -10,7 +10,6 @@ const CarouselItem = ({ title, backdrop_path, overview, vote_average, id }) => {
       className='carousel-item'
     >
       <div className='content'>
-        <span>{vote_average}</span>
         <h1 className='title'>{title}</h1>
         <p>{overview}</p>
 
