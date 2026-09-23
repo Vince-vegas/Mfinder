@@ -18,7 +18,7 @@ const NavSearch = () => {
 
   // TMDB v3 returns up to 20 results, limit the displayed suggestions to 4 on the client.
   // TMDB doesn't provide a result limit for this endpoint yet
-  const { moviesToDisplay, isLoading, cancelSearching } = useGetMovieSelection(searchVal)
+  const { moviesToDisplay, isLoading, cancelSearching, noMovies } = useGetMovieSelection(searchVal)
 
   const handleEnteringSearch = () => {
     setShowSelection(true)
@@ -94,6 +94,12 @@ const NavSearch = () => {
             {moviesToDisplay.length > 0 && (
               <p className='sub-text'>Movies</p>
             )}
+
+            {(noMovies && !!searchVal.length) && (
+              <div className='no-movies'>
+                <p>No movies found. Try different keywords.</p>
+              </div>
+            )}
             
             {moviesToDisplay.map((movie) => {
               return <Link onClick={resetSearchInput} key={movie.id} className="selection" to={`/title/${movie.id}`}>
@@ -128,7 +134,7 @@ const NavSearch = () => {
             </Link>
             })}
 
-            {moviesToDisplay.length === 0 && (
+            {(moviesToDisplay.length === 0 && !noMovies) && (
               <p className='start-typing'>Start typing to discover movies</p>
             )}
             <Link onClick={resetSearchInput} className='search-for' to={`/search?q=${searchVal}`}>

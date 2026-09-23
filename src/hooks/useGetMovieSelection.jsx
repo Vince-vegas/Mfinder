@@ -5,6 +5,7 @@ import { debounce } from "../Utils/debounce"
 export const useGetMovieSelection = (movieName) => {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(false)
+  const [noMovies, setNoMovies] = useState(false)
 
    const handleSearchDebounce = useMemo(() => {
     return debounce(async (movieName) => {
@@ -27,6 +28,11 @@ export const useGetMovieSelection = (movieName) => {
         const results = data.results.slice(0, 4)
 
         setMovies(results)
+        if(results.length === 0) {
+          setNoMovies(true)
+          return;
+        }
+        setNoMovies(false)
       } catch (error) {
         console.error(error)
       } finally {
@@ -54,7 +60,8 @@ export const useGetMovieSelection = (movieName) => {
   const cancelSearching = () => {
     handleSearchDebounce.cancel()
     setIsLoading(false)
+    setNoMovies(false)
   }
 
-  return { moviesToDisplay: movies, isLoading, cancelSearching }
+  return { moviesToDisplay: movies, isLoading, cancelSearching, noMovies }
 }
