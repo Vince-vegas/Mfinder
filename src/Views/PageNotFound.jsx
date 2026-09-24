@@ -7,9 +7,9 @@ const PageNotFound = () => {
     <div className="page-error">
       <div className="container text-center">
         <div className="error-message">
-          <h1>Something went wrong!</h1>
-          <Link to="/home" className="btn">
-            Go To Homepage
+          <h1>Page not found. 🎬</h1>
+          <Link to="/discover" className="btn">
+            Discover movies
           </Link>
         </div>
       </div>
