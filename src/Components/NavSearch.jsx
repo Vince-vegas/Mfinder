@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef, useEffect } from 'react';
+import { Fragment, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
