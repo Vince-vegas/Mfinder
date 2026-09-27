@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import SearchedError from '../Components/SearchedError';
@@ -28,7 +28,7 @@ const MovieSearched = (props) => {
     return () => {
       promSearched.abort();
     };
-  }, [searchedValue]);
+  }, [searchedValue, titleQuery]);
 
   // reset the state when unmount
   useEffect(() => {

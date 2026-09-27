@@ -2,15 +2,17 @@ import { useEffect, useMemo, useState } from "react"
 import { debounce } from "../Utils/debounce"
 
 
-export const useGetMovieSelection = (movieName) => {
+export const useGetMovieSelection = () => {
   const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(false)
   const [noMovies, setNoMovies] = useState(false)
+  const [searchVal, setSearchVal] = useState('');
+  const [showSelection, setShowSelection] = useState(false)
 
    const handleSearchDebounce = useMemo(() => {
-    return debounce(async (movieName) => {
+    return debounce(async (searchVal) => {
       try {
-        const res = await fetch(`https://api.themoviedb.org/3/search/movie?language=en-US&query=${movieName}&page=1&include_adult=false`, {
+        const res = await fetch(`https://api.themoviedb.org/3/search/movie?language=en-US&query=${searchVal}&page=1&include_adult=false`, {
           headers: {
             'Content-type': 'application/json',
             'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
@@ -27,6 +29,7 @@ export const useGetMovieSelection = (movieName) => {
         // TMDB doesn't provide a result limit for this endpoint yet
         const results = data.results.slice(0, 4)
 
+        setShowSelection(true)
         setMovies(results)
         if(results.length === 0) {
           setNoMovies(true)
@@ -42,7 +45,7 @@ export const useGetMovieSelection = (movieName) => {
   }, [])
   
   useEffect(() => {
-    if (!movieName.trim()) {
+    if (!searchVal.trim()) {
       setMovies([])
       setIsLoading(false)
       handleSearchDebounce.cancel()
@@ -50,18 +53,25 @@ export const useGetMovieSelection = (movieName) => {
     }
     
     setIsLoading(true)
-    handleSearchDebounce(movieName)
+    handleSearchDebounce(searchVal)
 
     return () => {
       handleSearchDebounce.cancel()
     }
-  }, [movieName])
+  }, [searchVal])
 
-  const cancelSearching = () => {
+  const resetSearching = () => {
     handleSearchDebounce.cancel()
     setIsLoading(false)
     setNoMovies(false)
+    setSearchVal("")
+    setShowSelection(false)
   }
 
-  return { moviesToDisplay: movies, isLoading, cancelSearching, noMovies }
+  const handleSearch = (e) => {
+    const { value } = e.target;
+    setSearchVal(value);
+  };
+
+  return { moviesToDisplay: movies, isLoading, resetSearching, noMovies, searchVal, handleSearch, showSelection, setShowSelection }
 }

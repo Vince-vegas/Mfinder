@@ -1,4 +1,4 @@
-import { useState, Fragment, useRef, useEffect, useMemo } from 'react';
+import { useState, Fragment, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
@@ -10,31 +10,18 @@ const NavSearch = () => {
   // =======================
   const history = useHistory();
   const searchRef = useRef(null)
-  const [searchVal, setSearchVal] = useState('');
-  const [showSelection, setShowSelection] = useState(false)
   const { genres } = useSelector((state) => state.navHandlers);
 
   const dispatch = useDispatch();
 
   // TMDB v3 returns up to 20 results, limit the displayed suggestions to 4 on the client.
   // TMDB doesn't provide a result limit for this endpoint yet
-  const { moviesToDisplay, isLoading, cancelSearching, noMovies } = useGetMovieSelection(searchVal)
+  const { moviesToDisplay, isLoading, resetSearching, noMovies, searchVal, handleSearch, showSelection, setShowSelection } = useGetMovieSelection()
 
   const handleEnteringSearch = () => {
     setShowSelection(true)
     dispatch(onCloseMenus());
   }
-
-  const resetSearchInput = () => {
-    setShowSelection(false)
-    setSearchVal("")
-    cancelSearching()
-  }
-
-  const handleSearch = (e) => {
-    const { value } = e.target;
-    setSearchVal(value);
-  };
 
   const onSubmitSearch = (e) => {
     e.preventDefault();
@@ -42,7 +29,7 @@ const NavSearch = () => {
     dispatch(onSetSearch(searchVal));
     // route /search
     history.push(`/search?q=${searchVal}`);
-    resetSearchInput()
+    resetSearching()
   };
   // ==================================
 
@@ -80,7 +67,7 @@ const NavSearch = () => {
             />
             {isLoading && <span className="search-spinner"></span>}
             {searchVal && (
-              <button type="button" className="reset-search" onClick={resetSearchInput}>
+              <button type="button" className="reset-search" onClick={resetSearching}>
                 <svg className='exit-icon' data-slot="icon" fill="none" strokeWidth="3.0" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12"></path>
                 </svg>
@@ -102,7 +89,7 @@ const NavSearch = () => {
             )}
             
             {moviesToDisplay.map((movie) => {
-              return <Link onClick={resetSearchInput} key={movie.id} className="selection" to={`/title/${movie.id}`}>
+              return <Link onClick={resetSearching} key={movie.id} className="selection" to={`/title/${movie.id}`}>
               <div className='movie'>
                 <div className="photo">
                   <img src={`https://image.tmdb.org/t/p/w300${movie.backdrop_path
@@ -137,8 +124,8 @@ const NavSearch = () => {
             {(moviesToDisplay.length === 0 && !noMovies) && (
               <p className='start-typing'>Start typing to discover movies</p>
             )}
-            <Link onClick={resetSearchInput} className='search-for' to={`/search?q=${searchVal}`}>
-              <button type='submit'>
+            <Link onClick={resetSearching} className='search-for' to={`/search?q=${searchVal}`}>
+              <button type='button'>
                 <SearchIcon />
               </button>
               <p>Search for {searchVal.length > 0 ? `"${searchVal}"`: "a movie"}</p>
