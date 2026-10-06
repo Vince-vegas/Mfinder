@@ -1,13 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import '../Styles/genres-layout.scss';
-
 import { useSelector, useDispatch } from 'react-redux';
-
 import {
   fetchHomeMovies,
   onResetState,
-  onSetPage,
+  onNextPage, 
+  onPreviousPage, 
+  onSetPage
 } from '../Store/movies/moviesReducer';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
@@ -19,7 +19,7 @@ const HomeMovies = () => {
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch();
 
-  const { sorted, page, movies, isLoading, totalPage } = moviesContext;
+  const { sorted, page, movies, isLoading, totalPage, total_list_displayed, first_list } = moviesContext;
 
   useEffect(() => {
     // console.log(moviesContext);
@@ -31,13 +31,7 @@ const HomeMovies = () => {
       promMovies.abort();
     };
   }, [sorted, page]);
-
-  // ====================
-
-  const handleSetPage = (id) => {
-    dispatch(onSetPage(id));
-  };
-
+  
   // reset the state when unmount
   useEffect(() => {
     return () => {
@@ -61,11 +55,7 @@ const HomeMovies = () => {
 
         <CollectMovies moviesArray={movies} />
         {movies.length > 0 && (
-          <PagePagination
-            totalPagination={totalPage}
-            currentPage={page}
-            handleClick={handleSetPage}
-          />
+          <PagePagination page={page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
         )}
       </div>
     </div>

@@ -1,6 +1,8 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { movieSortValue } from '../../contants/movieSortValue';
 
+console.warn = function() {}
+
 export const fetchHomeMovies = createAsyncThunk(
   'movies/FETCH_MOVIES',
   async (moviesObj, thunkAPI) => {
@@ -13,6 +15,7 @@ export const fetchHomeMovies = createAsyncThunk(
         }}
       );
       const data = await getMovies.json();
+      window.scrollTo(0, 0);
       return data;
     } catch (error) {
       throw Error('404 test');
@@ -54,10 +57,19 @@ const moviesSlice = createSlice({
     sorted: movieSortValue.popularity,
     page: 1,
     genreId: 28,
-    totalPage: 5,
+    first_list: 1,
+    totalPage: null,
+    total_list_displayed: 4,
+    TMDB_MAX_PAGINATION: 500,
     error: {},
   },
   reducers: {
+    PREVIOUS_PAGE: (state) => {
+      state.page = state.page - 1
+    },
+    NEXT_PAGE: (state) => {
+      state.page = state.page + 1
+    },
     SORTBY_POPULAR: (state) => {
       state.sorted = movieSortValue.popularity;
       state.page = 1;
@@ -82,6 +94,7 @@ const moviesSlice = createSlice({
       state.movies = [];
       state.page = 1;
       state.genreId = 28;
+      state.totalPage = null;
       state.error = {};
     },
   },
@@ -96,7 +109,7 @@ const moviesSlice = createSlice({
     [fetchHomeMovies.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.movies = action.payload.results;
-      // state.page = action.payload.page;
+      state.totalPage = action.payload.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.total_pages;
     },
     [fetchGenreMovies.pending]: (state) => {
       state.isLoading = true;
@@ -110,6 +123,7 @@ const moviesSlice = createSlice({
       state.movies = action.payload.movies.results;
       state.page = action.payload.movies.page;
       state.genreId = action.payload.genreId;
+      state.totalPage = action.payload.movies.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.movies.total_pages;
     },
   },
 });
@@ -121,6 +135,8 @@ const {
   SET_PAGE,
   SET_GENRE,
   resetState,
+  PREVIOUS_PAGE,
+  NEXT_PAGE
 } = moviesSlice.actions;
 
 const onSortPopular = () => ({ type: SORTBY_POPULAR.type });
@@ -129,6 +145,9 @@ const onSortLatest = () => ({ type: SORTBY_LATEST.type });
 
 const onSetPage = (page) => SET_PAGE({ page });
 const onSetGenre = (id) => SET_GENRE({ id });
+
+const onPreviousPage = () => PREVIOUS_PAGE()
+const onNextPage = () => NEXT_PAGE()
 
 // reset the state
 const onResetState = () => resetState();
@@ -140,5 +159,7 @@ export {
   onResetState,
   onSetPage,
   onSetGenre,
+  onPreviousPage,
+  onNextPage
 };
 export default moviesSlice.reducer;

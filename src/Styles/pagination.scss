@@ -10,8 +10,10 @@
 
   .pgn-list {
     margin: 5px;
+    align-self: center;
 
     .pgn-link {
+      user-select: none;
       min-width: 45px;
       min-height: 45px;
       text-align: center;
@@ -28,6 +30,65 @@
 
     .pgn-link--active {
       border-color: #3498db !important;
+    }
+  }
+
+  .pgn-list-handler {
+    margin: 0 20px;
+
+    .previous-next-btn {
+      color: white;
+      font-size: 16px;
+      padding: 0 15px;
+      border-radius: 2px;
+      background: #1c2233de;
+      border-radius: 50px;
+
+      &:disabled {
+        background: #393c3c;
+        color: rgba(255, 255, 255, 0.5);
+        cursor: auto;
+
+        &:hover {
+          background: #393c3c;
+        }
+      }
+
+      .icon-left, .icon-right {
+        display: inline-block;
+        vertical-align: middle;
+        position: relative;
+        top: 0.5px;
+      }
+
+      .icon-left {
+        margin-right: 10px;
+      }
+
+      .icon-right {
+        margin-left: 10px;
+      }
+
+      &:hover {
+        border-color: transparent;
+        background: rgb(46 55 81);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .pgn-menu {
+    .pgn-list-handler {
+      margin: 0 10px;
+      
+      .text {
+        display: none;
+      }
+
+      .icon-left, .icon-right {
+        margin: 0!important;
+      }
     }
   }
 }

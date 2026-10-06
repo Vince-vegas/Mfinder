@@ -9,6 +9,8 @@ import PageLoad from '../Components/ShowLoad/PageLoad';
 import {
   onResetState,
   onSetPage,
+  onPreviousPage,
+  onNextPage,
   fetchTopActors,
 } from '../Store/TopActors/actorsReducer';
 import '../Styles/actors-page.scss';
@@ -17,11 +19,7 @@ const Actors = () => {
   const topActors = useSelector((state) => state.topActors);
   const dispatch = useDispatch();
 
-  const { isLoading, actors, page, totalPage } = topActors;
-
-  const handleSetPage = (id) => {
-    dispatch(onSetPage(id));
-  };
+  const { isLoading, actors, page, totalPage, total_list_displayed, first_list } = topActors;
 
   useEffect(() => {
     const promActors = dispatch(fetchTopActors(page));
@@ -54,11 +52,7 @@ const Actors = () => {
       {/* Show Spinner when fetching */}
       {isLoading && <PageLoad />}
 
-      <PagePagination
-        totalPagination={totalPage}
-        currentPage={page}
-        handleClick={handleSetPage}
-      />
+      <PagePagination page={page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 import '../Styles/genres-layout.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
@@ -8,6 +8,8 @@ import { useParams } from 'react-router-dom';
 import {
   onResetState,
   fetchGenreMovies,
+  onNextPage, 
+  onPreviousPage, 
   onSetPage,
 } from '../Store/movies/moviesReducer';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
@@ -20,7 +22,7 @@ const Genres = () => {
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch();
 
-  const { sorted, page, movies, genreId, isLoading, totalPage } = moviesContext;
+  const { sorted, genreId, page, movies, isLoading, totalPage, total_list_displayed, first_list } = moviesContext;
 
   useEffect(() => {
     // the +id to convert string into Number
@@ -40,10 +42,6 @@ const Genres = () => {
 
   // ====================
 
-  const handleSetPage = (id) => {
-    dispatch(onSetPage(id));
-  };
-
   // reset the state when unmount
   useEffect(() => {
     return () => {
@@ -62,11 +60,7 @@ const Genres = () => {
         <CollectMovies moviesArray={movies} />
 
         {movies.length > 0 && (
-          <PagePagination
-            totalPagination={totalPage}
-            currentPage={page}
-            handleClick={handleSetPage}
-          />
+          <PagePagination page={page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
         )}
       </div>
     </div>

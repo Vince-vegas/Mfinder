@@ -45,7 +45,7 @@ const NavSearch = () => {
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, []);
+  }, [setShowSelection]);
 
   return (
     <Fragment>
