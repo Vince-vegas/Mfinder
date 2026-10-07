@@ -15,7 +15,6 @@ export const fetchHomeMovies = createAsyncThunk(
         }}
       );
       const data = await getMovies.json();
-      window.scrollTo(0, 0);
       return data;
     } catch (error) {
       throw Error('404 test');
@@ -35,8 +34,6 @@ export const fetchGenreMovies = createAsyncThunk(
         }}
       );
       const data = await getMovies.json();
-      // Scroll to Top when Pagination clicked
-      window.scrollTo(0, 0);
       return {
         movies: data,
         genreId: moviesObj.genreId,
@@ -59,6 +56,7 @@ const moviesSlice = createSlice({
     genreId: 28,
     first_list: 1,
     current_page: 1,
+    user_clicks_pagination: false,
     totalPage: null,
     total_list_displayed: 4,
     TMDB_MAX_PAGINATION: 500,
@@ -67,6 +65,7 @@ const moviesSlice = createSlice({
   reducers: {
     PREVIOUS_PAGE: (state) => {
       state.page = state.page - 1;
+      state.user_clicks_pagination = true;
     },
     NEXT_PAGE: (state) => {
       state.page = state.page + 1;
@@ -97,6 +96,7 @@ const moviesSlice = createSlice({
       state.genreId = 28;
       state.totalPage = null;
       state.current_page = 1;
+      state.user_clicks_pagination = false;
       state.error = {};
     },
   },

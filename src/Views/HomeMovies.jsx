@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import '../Styles/genres-layout.scss';
 import { useSelector, useDispatch } from 'react-redux';
 import {
@@ -14,10 +14,14 @@ import PageLoad from '../Components/ShowLoad/PageLoad';
 import PagePagination from '../Components/Pagination/PagePagination';
 import Carousel from '../Components/Carousel/Carousel';
 import SortMoviesUI from '../Components/SortMoviesUI';
+import { movieSortValue } from '../contants/movieSortValue';
 
 const HomeMovies = () => {
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch();
+  const carouselRef = useRef(null)
+  const previousPage = useRef(1)
+  const previousSortMovie = useRef(movieSortValue.popularity)
 
   const { sorted, page, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
 
@@ -39,13 +43,32 @@ const HomeMovies = () => {
     };
   }, []);
 
+  useEffect(() => {
+    const elementCarousel = carouselRef.current
+    const navigationHeight = 60;
+
+    if(!elementCarousel) return;
+
+    const rect = elementCarousel.getBoundingClientRect();
+    const y = (rect.bottom + window.scrollY) - navigationHeight;
+
+    if(previousPage.current !== current_page && previousSortMovie.current === sorted) {
+      window.scrollTo({
+        top: y,
+        behavior: "instant"
+      })
+      previousPage.current = current_page;
+    }
+    previousSortMovie.current = sorted;
+  }, [current_page])
+
   return (
     <div className='main-collections'>
       <div className='container'>
         {/* Show Carousel and SortMoviesUI at first homepage component mount */}
         {movies.length > 0 && (
           <>
-            <Carousel />
+            <Carousel ref={carouselRef} />
             <SortMoviesUI />
           </>
         )}

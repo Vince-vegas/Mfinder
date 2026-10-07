@@ -1,11 +1,10 @@
-import React, { useRef, useState } from 'react';
+import { forwardRef, useState } from 'react';
 import { carouselMovies } from '../../Store/CarouselMovies/CarouselReducers';
 import CarouselItem from './CarouselItem';
 import '../../Styles/carousel.scss';
 
-const Carousel = () => {
+const Carousel = forwardRef((_, carouselRef) => {
   const [itemId, setItemId] = useState(0);
-  const carouselRef = useRef(null);
 
   const onSetIndicators = (index) => {
     setItemId(index);
@@ -46,6 +45,6 @@ const Carousel = () => {
       </ul>
     </div>
   );
-};
+})
 
 export default Carousel;
