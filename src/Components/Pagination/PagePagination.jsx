@@ -3,9 +3,9 @@ import { genPaginationArray } from '../../Utils/genPaginationArray';
 import { useDispatch } from 'react-redux';
 import { genPaginationRange } from '../../Utils/genPaginationRange';
 
-const PagePagination = ({ page, totalPage, total_list_displayed, first_list, onSetPage, onPreviousPage, onNextPage }) => {
+const PagePagination = ({ current_page, totalPage, total_list_displayed, first_list, onSetPage, onPreviousPage, onNextPage }) => {
   const dispatch = useDispatch()
-  const { start, end } = genPaginationRange(page, totalPage, total_list_displayed)
+  const { start, end } = genPaginationRange(current_page, totalPage, total_list_displayed)
 
   const handleSetPage = (id) => {
     dispatch(onSetPage(id));
@@ -23,7 +23,7 @@ const PagePagination = ({ page, totalPage, total_list_displayed, first_list, onS
     <div className='pagination'>
       <ul className='pgn-menu'>
         <li className='pgn-list pgn-list-handler'>
-          <button className='pgn-link previous-next-btn' disabled={page === first_list} onClick={handleBackPage}>
+          <button className='pgn-link previous-next-btn' disabled={current_page === first_list} onClick={handleBackPage}>
           <span className='icon-left'>
             <svg height={24} width={24} data-slot="icon" fill="none" strokeWidth="3.00" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
               <path strokeLinecap="round" strokeLinejoin="round" d="M15.75 19.5 8.25 12l7.5-7.5"></path>
@@ -35,9 +35,10 @@ const PagePagination = ({ page, totalPage, total_list_displayed, first_list, onS
         <li className='pgn-list'>
           <button
             className={
-              page === first_list ? 'pgn-link pgn-link--active' : 'pgn-link'
+              current_page === first_list ? 'pgn-link pgn-link--active' : 'pgn-link'
             }
-              onClick={handleSetPage.bind(this, first_list)}
+            onClick={handleSetPage.bind(this, first_list)}
+            disabled={current_page === first_list}
             >
             {first_list}
           </button>
@@ -54,9 +55,10 @@ const PagePagination = ({ page, totalPage, total_list_displayed, first_list, onS
             <li key={id} className='pgn-list'>
               <button
                 className={
-                  page === id ? 'pgn-link pgn-link--active' : 'pgn-link'
+                  current_page === id ? 'pgn-link pgn-link--active' : 'pgn-link'
                 }
                 onClick={handleSetPage.bind(this, id)}
+                disabled={current_page === id}
               >
                 {id}
               </button>
@@ -73,15 +75,16 @@ const PagePagination = ({ page, totalPage, total_list_displayed, first_list, onS
         <li className='pgn-list'>
           <button
             className={
-              page === totalPage ? 'pgn-link pgn-link--active' : 'pgn-link'
+              current_page === totalPage ? 'pgn-link pgn-link--active' : 'pgn-link'
             }
-              onClick={handleSetPage.bind(this, totalPage)}
+            onClick={handleSetPage.bind(this, totalPage)}
+            disabled={current_page === totalPage}
             >
             {totalPage}
           </button>
         </li>
         <li className='pgn-list pgn-list-handler'>
-          <button className='pgn-link previous-next-btn' disabled={page === totalPage} onClick={handleNextPage}><span className='text'>Next</span>
+          <button className='pgn-link previous-next-btn' disabled={current_page === totalPage} onClick={handleNextPage}><span className='text'>Next</span>
             <span className='icon-right'>
               <svg height={24} width={24} data-slot="icon" fill="none" strokeWidth="3.00" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                 <path strokeLinecap="round" strokeLinejoin="round" d="m8.25 4.5 7.5 7.5-7.5 7.5"></path>

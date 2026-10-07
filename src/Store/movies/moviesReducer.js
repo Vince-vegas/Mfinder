@@ -58,6 +58,7 @@ const moviesSlice = createSlice({
     page: 1,
     genreId: 28,
     first_list: 1,
+    current_page: 1,
     totalPage: null,
     total_list_displayed: 4,
     TMDB_MAX_PAGINATION: 500,
@@ -65,10 +66,12 @@ const moviesSlice = createSlice({
   },
   reducers: {
     PREVIOUS_PAGE: (state) => {
-      state.page = state.page - 1
+      state.isLoading = true;
+      state.page = state.page - 1;
     },
     NEXT_PAGE: (state) => {
-      state.page = state.page + 1
+      state.isLoading = true;
+      state.page = state.page + 1;
     },
     SORTBY_POPULAR: (state) => {
       state.sorted = movieSortValue.popularity;
@@ -83,6 +86,7 @@ const moviesSlice = createSlice({
       state.page = 1;
     },
     SET_PAGE: (state, action) => {
+      state.isLoading = true;
       state.page = action.payload.page;
     },
     SET_GENRE: (state, action) => {
@@ -110,6 +114,7 @@ const moviesSlice = createSlice({
       state.isLoading = false;
       state.movies = action.payload.results;
       state.totalPage = action.payload.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.total_pages;
+      state.current_page = action.payload.page
     },
     [fetchGenreMovies.pending]: (state) => {
       state.isLoading = true;
