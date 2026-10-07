@@ -24,31 +24,23 @@ const navHandlerSlice = createSlice({
       { id: 10752, name: 'War' },
       { id: 37, name: 'Western' },
     ],
-    showMobileSearch: false,
     showMenus: false,
   },
   reducers: {
     onCloseMenus: (state) => {
       state.showMenus = false;
     },
-    toggleMobileSearch: (state) => {
-      state.showMobileSearch = !state.showMobileSearch;
-      state.showMenus = false;
-    },
     toggleShowMenus: (state) => {
       state.showMenus = !state.showMenus;
-      state.showMobileSearch = false;
     },
 
     resetNavHandler: (state) => {
-      state.showMobileSearch = false;
       state.showMenus = false;
     },
   },
 });
 
 export const {
-  toggleMobileSearch,
   toggleShowMenus,
   resetNavHandler,
   onCloseMenus,
