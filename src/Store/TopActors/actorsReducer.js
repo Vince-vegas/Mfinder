@@ -33,6 +33,7 @@ const actorSlice = createSlice({
     actors: [],
     page: 1,
     first_list: 1,
+    current_page: 1,
     totalPage: null,
     total_list_displayed: 4,
     TMDB_MAX_PAGINATION: 500,
@@ -68,6 +69,7 @@ const actorSlice = createSlice({
       state.isLoading = false;
       state.actors = action.payload.results;
       state.totalPage = action.payload.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.total_pages;
+      state.current_page = action.payload.page;
     },
   },
 });

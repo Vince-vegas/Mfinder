@@ -66,11 +66,9 @@ const moviesSlice = createSlice({
   },
   reducers: {
     PREVIOUS_PAGE: (state) => {
-      state.isLoading = true;
       state.page = state.page - 1;
     },
     NEXT_PAGE: (state) => {
-      state.isLoading = true;
       state.page = state.page + 1;
     },
     SORTBY_POPULAR: (state) => {
@@ -86,7 +84,6 @@ const moviesSlice = createSlice({
       state.page = 1;
     },
     SET_PAGE: (state, action) => {
-      state.isLoading = true;
       state.page = action.payload.page;
     },
     SET_GENRE: (state, action) => {
@@ -99,6 +96,7 @@ const moviesSlice = createSlice({
       state.page = 1;
       state.genreId = 28;
       state.totalPage = null;
+      state.current_page = 1;
       state.error = {};
     },
   },
@@ -114,7 +112,7 @@ const moviesSlice = createSlice({
       state.isLoading = false;
       state.movies = action.payload.results;
       state.totalPage = action.payload.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.total_pages;
-      state.current_page = action.payload.page
+      state.current_page = action.payload.page;
     },
     [fetchGenreMovies.pending]: (state) => {
       state.isLoading = true;
@@ -129,6 +127,7 @@ const moviesSlice = createSlice({
       state.page = action.payload.movies.page;
       state.genreId = action.payload.genreId;
       state.totalPage = action.payload.movies.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.movies.total_pages;
+      state.current_page = action.payload.movies.page;
     },
   },
 });

@@ -19,7 +19,7 @@ const Actors = () => {
   const topActors = useSelector((state) => state.topActors);
   const dispatch = useDispatch();
 
-  const { isLoading, actors, page, totalPage, total_list_displayed, first_list } = topActors;
+  const { isLoading, actors, page, totalPage, total_list_displayed, first_list, current_page } = topActors;
 
   useEffect(() => {
     const promActors = dispatch(fetchTopActors(page));
@@ -52,7 +52,7 @@ const Actors = () => {
       {/* Show Spinner when fetching */}
       {isLoading && <PageLoad />}
 
-      <PagePagination page={page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
+      <PagePagination current_page={current_page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
     </div>
   );
 };

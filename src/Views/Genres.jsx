@@ -22,7 +22,7 @@ const Genres = () => {
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch();
 
-  const { sorted, genreId, page, movies, isLoading, totalPage, total_list_displayed, first_list } = moviesContext;
+  const { sorted, genreId, page, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
 
   useEffect(() => {
     // the +id to convert string into Number
@@ -60,7 +60,7 @@ const Genres = () => {
         <CollectMovies moviesArray={movies} />
 
         {movies.length > 0 && (
-          <PagePagination page={page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
+          <PagePagination current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
         )}
       </div>
     </div>
