@@ -34,12 +34,12 @@ export const fetchGenreMovies = createAsyncThunk(
         }}
       );
       const data = await getMovies.json();
+      window.scrollTo(0, 0)
       return {
         movies: data,
         genreId: moviesObj.genreId,
       };
     } catch (error) {
-      // Scroll to Top when Pagination clicked
       window.scrollTo(0, 0);
       throw Error('404 test');
     }
