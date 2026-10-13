@@ -37,7 +37,9 @@ const MovieSearched = (props) => {
     };
   }, []);
 
-  if (!titleQuery) {
+  if(!!titleQuery && searchedMovie.length === 0 && isLoading) {
+    return <PageLoad />
+  } else if (!titleQuery) {
     return <SearchedError text='What are you looking for? 🎬 Enter a movie title to start exploring.' />;
   } else if(!!titleQuery && searchedMovie.length === 0) {
     return <SearchedError text={`No movies found for "${titleQuery}". Try different keywords.`} />
