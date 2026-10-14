@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import Routes from './Routes/Routes';
 import './Styles/main.scss';
 import './Styles/loader.scss';

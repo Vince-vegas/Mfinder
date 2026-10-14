@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Switch, Route, Redirect } from 'react-router-dom';
 
 import Main from '../Views/Main';

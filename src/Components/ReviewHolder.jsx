@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 const ReviewHolder = ({ author, created_at, content, avatar_path }) => {
   const [showComment, setShowComment] = useState(false);

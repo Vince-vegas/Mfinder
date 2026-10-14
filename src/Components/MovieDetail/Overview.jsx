@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import React, { Fragment } from 'react';
+import { Fragment } from 'react';
 import { Link } from 'react-router-dom';
 import YoutubeIcon from '../../Assets/SvgIcon/YoutubeIcon';
 import YoutubeModal from '../Modal/YoutubeModal';
