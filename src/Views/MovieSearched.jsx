@@ -9,15 +9,20 @@ import {
   onResetState,
 } from '../Store/NavSearch/searchReducer';
 import '../Styles/genres-layout.scss';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import PagePagination from '../Components/Pagination/PagePagination';
 
 const MovieSearched = () => {
   // get query
   const [searchParams, setSearchParams] = useSearchParams()
-  const titleQuery = searchParams.get("q").trim()
+  const titleQuery = searchParams.get("q")
   const page = Number(searchParams.get("page"))
+  const navigate = useNavigate()
   //
+
+  if((titleQuery && page) === null) {
+    navigate('/404-page')
+  }
 
   const movieSearchState = useSelector((state) => state.movieSearched);
   const dispatch = useDispatch();
@@ -40,7 +45,7 @@ const MovieSearched = () => {
   // reset the state when unmount
   useEffect(() => {
     if(page <= 0 || !page) {
-      setSearchParams({q: titleQuery, page: 1})
+      return setSearchParams({q: !!titleQuery ? titleQuery: '', page: 1})
     }
 
     return () => {
@@ -52,7 +57,7 @@ const MovieSearched = () => {
     return <PageLoad />
   } else if (!titleQuery) {
     return <SearchedError text='What are you looking for? 🎬 Enter a movie title to start exploring.' />;
-  } else if(!!titleQuery && searchedMovie.length === 0) {
+  } else if(!!titleQuery && searchedMovie.length === 0 && !isLoading) {
     return <SearchedError text={`No movies found for "${titleQuery}". Try different keywords.`} />
   }
 

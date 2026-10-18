@@ -28,7 +28,7 @@ const NavSearch = () => {
 
     dispatch(onSetSearch(searchVal));
     // // route /search
-    navigate(`/search?q=${searchVal}`);
+    navigate(`/search?q=${searchVal}&page=1`);
     resetSearching()
   };
   // ==================================
