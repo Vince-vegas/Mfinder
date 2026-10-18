@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
+import { useSearchParams } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import ActorCard from '../Components/Card/ActorCard';
 
@@ -8,20 +9,23 @@ import PageLoad from '../Components/ShowLoad/PageLoad';
 
 import {
   onResetState,
-  onSetPage,
-  onPreviousPage,
-  onNextPage,
   fetchTopActors,
 } from '../Store/TopActors/actorsReducer';
 import '../Styles/actors-page.scss';
 
 const Actors = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = Number(searchParams.get("page"))
   const topActors = useSelector((state) => state.topActors);
   const dispatch = useDispatch();
 
-  const { isLoading, actors, page, totalPage, total_list_displayed, first_list, current_page } = topActors;
+  const { isLoading, actors, totalPage, total_list_displayed, first_list, current_page } = topActors;
 
   useEffect(() => {
+    if(page <= 0 || !page) {
+      setSearchParams({page: 1})
+    }
+
     const promActors = dispatch(fetchTopActors(page));
 
     // abort fetch when unmount
@@ -52,7 +56,7 @@ const Actors = () => {
       {/* Show Spinner when fetching */}
       {isLoading && <PageLoad />}
 
-      {actors.length && <PagePagination current_page={current_page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />}
+      {actors.length && <PagePagination page={page} current_page={current_page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} />}
     </div>
   );
 };

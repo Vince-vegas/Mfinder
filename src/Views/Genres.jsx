@@ -3,14 +3,11 @@ import { useEffect } from 'react';
 import '../Styles/genres-layout.scss';
 
 import { useSelector, useDispatch } from 'react-redux';
-import { useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 
 import {
   onResetState,
   fetchGenreMovies,
-  onNextPage, 
-  onPreviousPage, 
-  onSetPage,
 } from '../Store/movies/moviesReducer';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
@@ -18,13 +15,18 @@ import PagePagination from '../Components/Pagination/PagePagination';
 import SortMoviesUI from '../Components/SortMoviesUI';
 
 const Genres = () => {
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = Number(searchParams.get("page"))
   const { id } = useParams();
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch();
 
-  const { sorted, genreId, page, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
+  const { sorted, genreId, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
 
   useEffect(() => {
+    if(page <= 0 || !page) {
+      setSearchParams({page: 1})
+    }
     // the +id to convert string into Number
     const promGenres = dispatch(
       fetchGenreMovies({
@@ -36,6 +38,7 @@ const Genres = () => {
 
     // abort fetch when unmount
     return () => {
+      console.log(1)
       promGenres.abort();
     };
   }, [sorted, page, genreId]);
@@ -60,7 +63,7 @@ const Genres = () => {
         <CollectMovies moviesArray={movies} />
 
         {movies.length > 0 && (
-          <PagePagination current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
+          <PagePagination page={page} current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} />
         )}
       </div>
     </div>

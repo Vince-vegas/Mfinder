@@ -8,7 +8,7 @@ const PageNotFound = () => {
       <div className="container text-center">
         <div className="error-message">
           <h1>Page not found. 🎬</h1>
-          <Link to="/discover" className="btn">
+          <Link to="/discover?page=1" className="btn">
             Discover movies
           </Link>
         </div>

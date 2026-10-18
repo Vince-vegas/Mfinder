@@ -1,6 +1,6 @@
 import { Fragment, useRef, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import SearchIcon from '../Assets/SvgIcon/SearchIcon';
 import { onSetSearch } from '../Store/NavSearch/searchReducer';
 import { useGetMovieSelection } from '../hooks/useGetMovieSelection';
@@ -8,7 +8,7 @@ import { onCloseMenus } from '../Store/NavHandler/navHandlerReducer';
 
 const NavSearch = () => {
   // =======================
-  const history = useHistory();
+  const navigate = useNavigate();
   const searchRef = useRef(null)
   const { genres } = useSelector((state) => state.navHandlers);
 
@@ -27,8 +27,8 @@ const NavSearch = () => {
     e.preventDefault();
 
     dispatch(onSetSearch(searchVal));
-    // route /search
-    history.push(`/search?q=${searchVal}`);
+    // // route /search
+    navigate(`/search?q=${searchVal}`);
     resetSearching()
   };
   // ==================================

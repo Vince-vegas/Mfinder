@@ -1,8 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { movieSortValue } from '../../contants/movieSortValue';
 
-console.warn = function() {}
-
 export const fetchHomeMovies = createAsyncThunk(
   'movies/FETCH_MOVIES',
   async (moviesObj, thunkAPI) => {
@@ -52,38 +50,23 @@ const moviesSlice = createSlice({
     movies: [],
     isLoading: false,
     sorted: movieSortValue.popularity,
-    page: 1,
     genreId: 28,
     first_list: 1,
     current_page: 1,
-    user_clicks_pagination: false,
     totalPage: null,
     total_list_displayed: 4,
     TMDB_MAX_PAGINATION: 500,
     error: {},
   },
   reducers: {
-    PREVIOUS_PAGE: (state) => {
-      state.page = state.page - 1;
-      state.user_clicks_pagination = true;
-    },
-    NEXT_PAGE: (state) => {
-      state.page = state.page + 1;
-    },
     SORTBY_POPULAR: (state) => {
       state.sorted = movieSortValue.popularity;
-      state.page = 1;
     },
     SORTBY_RATED: (state) => {
       state.sorted = movieSortValue.top_rated;
-      state.page = 1;
     },
     SORTBY_LATEST: (state) => {
       state.sorted = movieSortValue.now_playing;
-      state.page = 1;
-    },
-    SET_PAGE: (state, action) => {
-      state.page = action.payload.page;
     },
     SET_GENRE: (state, action) => {
       state.genreId = action.payload.id;
@@ -92,11 +75,9 @@ const moviesSlice = createSlice({
       state.isLoading = false;
       state.sorted = movieSortValue.popularity;
       state.movies = [];
-      state.page = 1;
       state.genreId = 28;
       state.totalPage = null;
       state.current_page = 1;
-      state.user_clicks_pagination = false;
       state.error = {};
     },
   },
@@ -124,7 +105,6 @@ const moviesSlice = createSlice({
     [fetchGenreMovies.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.movies = action.payload.movies.results;
-      state.page = action.payload.movies.page;
       state.genreId = action.payload.genreId;
       state.totalPage = action.payload.movies.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.movies.total_pages;
       state.current_page = action.payload.movies.page;
@@ -136,22 +116,15 @@ const {
   SORTBY_POPULAR,
   SORTBY_RATED,
   SORTBY_LATEST,
-  SET_PAGE,
   SET_GENRE,
   resetState,
-  PREVIOUS_PAGE,
-  NEXT_PAGE
 } = moviesSlice.actions;
 
 const onSortPopular = () => ({ type: SORTBY_POPULAR.type });
 const onSortRated = () => ({ type: SORTBY_RATED.type });
 const onSortLatest = () => ({ type: SORTBY_LATEST.type });
 
-const onSetPage = (page) => SET_PAGE({ page });
 const onSetGenre = (id) => SET_GENRE({ id });
-
-const onPreviousPage = () => PREVIOUS_PAGE()
-const onNextPage = () => NEXT_PAGE()
 
 // reset the state
 const onResetState = () => resetState();
@@ -161,9 +134,6 @@ export {
   onSortRated,
   onSortLatest,
   onResetState,
-  onSetPage,
   onSetGenre,
-  onPreviousPage,
-  onNextPage
 };
 export default moviesSlice.reducer;

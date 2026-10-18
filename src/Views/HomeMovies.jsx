@@ -5,9 +5,6 @@ import { useSelector, useDispatch } from 'react-redux';
 import {
   fetchHomeMovies,
   onResetState,
-  onNextPage, 
-  onPreviousPage, 
-  onSetPage
 } from '../Store/movies/moviesReducer';
 import CollectMovies from '../Components/Collect-Movie/CollectMovies';
 import PageLoad from '../Components/ShowLoad/PageLoad';
@@ -15,20 +12,24 @@ import PagePagination from '../Components/Pagination/PagePagination';
 import Carousel from '../Components/Carousel/Carousel';
 import SortMoviesUI from '../Components/SortMoviesUI';
 import { movieSortValue } from '../contants/movieSortValue';
+import { useSearchParams } from 'react-router-dom';
 
 const HomeMovies = () => {
-  const moviesContext = useSelector((state) => state.moviesState);
+  const [searchParams, setSearchParams] = useSearchParams()
+  const page = Number(searchParams.get("page"))
+
   const dispatch = useDispatch();
   const carouselRef = useRef(null)
   const previousPage = useRef(1)
   const previousSortMovie = useRef(movieSortValue.popularity)
 
-  const { sorted, page, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
+  const moviesContext = useSelector((state) => state.moviesState);
+  const { sorted, movies, isLoading, totalPage, total_list_displayed, first_list, current_page } = moviesContext;
 
   useEffect(() => {
     // console.log(moviesContext);
     // the * to conver string into Number
-    const promMovies = dispatch(fetchHomeMovies({ sorted, page }));
+    const promMovies = dispatch(fetchHomeMovies({ sorted, page: page }));
 
     // abort fetch when unmount
     return () => {
@@ -39,6 +40,9 @@ const HomeMovies = () => {
   // reset the state when unmount
   useEffect(() => {
     window.scrollTo(0, 0)
+    if(page <= 0 || !page) {
+      setSearchParams({page: 1})
+    }
     return () => {
       dispatch(onResetState());
     };
@@ -79,7 +83,7 @@ const HomeMovies = () => {
 
         <CollectMovies moviesArray={movies} />
         {movies.length > 0 && (
-          <PagePagination current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} onPreviousPage={onPreviousPage} onNextPage={onNextPage} onSetPage={onSetPage} />
+          <PagePagination page={page} current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} />
         )}
       </div>
     </div>

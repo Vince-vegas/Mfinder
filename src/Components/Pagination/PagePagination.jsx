@@ -1,22 +1,26 @@
 import '../../Styles/pagination.scss';
 import { genPaginationArray } from '../../Utils/genPaginationArray';
-import { useDispatch } from 'react-redux';
 import { genPaginationRange } from '../../Utils/genPaginationRange';
+import { useSearchParams } from 'react-router-dom';
 
-const PagePagination = ({ current_page, totalPage, total_list_displayed, first_list, onSetPage, onPreviousPage, onNextPage }) => {
-  const dispatch = useDispatch()
+const PagePagination = ({page, current_page, totalPage, total_list_displayed, first_list }) => {
+  const [_, setSearchParams] = useSearchParams()
+
   const { start, end } = genPaginationRange(current_page, totalPage, total_list_displayed)
 
   const handleSetPage = (id) => {
-    dispatch(onSetPage(id));
+    setSearchParams((params) => {
+      params.set("page", `${id}`)
+      return params
+    })
   };
 
   const handleBackPage = () => {
-    dispatch(onPreviousPage())
+    handleSetPage(page - 1)
   }
 
   const handleNextPage = () => {
-    dispatch(onNextPage())
+    handleSetPage(page + 1)
   }
 
   return (

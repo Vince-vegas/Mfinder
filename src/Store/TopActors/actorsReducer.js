@@ -31,7 +31,6 @@ const actorSlice = createSlice({
   initialState: {
     isLoading: false,
     actors: [],
-    page: 1,
     first_list: 1,
     current_page: 1,
     totalPage: null,
@@ -40,19 +39,9 @@ const actorSlice = createSlice({
     error: {},
   },
   reducers: {
-    PREVIOUS_PAGE: (state) => {
-      state.page = state.page - 1
-    },
-    NEXT_PAGE: (state) => {
-      state.page = state.page + 1
-    },
-    SET_PAGE: (state, action) => {
-      state.page = action.payload.page;
-    },
     resetState: (state) => {
       state.isLoading = false;
       state.actors = [];
-      state.page = 1;
       state.totalPage = null;
       state.error = {};
     },
@@ -74,13 +63,10 @@ const actorSlice = createSlice({
   },
 });
 
-const { SET_PAGE, PREVIOUS_PAGE, NEXT_PAGE, resetState } = actorSlice.actions;
+const { resetState } = actorSlice.actions;
 
-const onSetPage = (page) => SET_PAGE({ page });
 const onResetState = () => resetState();
 
-const onPreviousPage = () => PREVIOUS_PAGE()
-const onNextPage = () => NEXT_PAGE()
 
-export { onResetState, onSetPage, onPreviousPage, onNextPage, fetchTopActors };
+export { onResetState, fetchTopActors };
 export default actorSlice.reducer;

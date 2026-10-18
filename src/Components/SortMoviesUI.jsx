@@ -1,10 +1,11 @@
-import React from 'react'
+import { useSearchParams } from 'react-router-dom';
 import { movieSortValue } from '../contants/movieSortValue'
 import TrendList from './TrendList'
 import { useDispatch, useSelector } from 'react-redux'
 import { onSortLatest, onSortPopular, onSortRated } from '../Store/movies/moviesReducer'
 
 const SortMoviesUI = () => {
+  const [_, setSearchParams] = useSearchParams()
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch()
 
@@ -13,12 +14,15 @@ const SortMoviesUI = () => {
   // Sorting functions
   const sortToPopular = () => {
     dispatch(onSortPopular());
+    setSearchParams({ page: 1 })
   };
   const sortToRated = () => {
     dispatch(onSortRated());
+    setSearchParams({ page: 1 })
   };
   const sortToLatest = () => {
     dispatch(onSortLatest());
+    setSearchParams({ page: 1 })
   };
 
   return (

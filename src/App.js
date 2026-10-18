@@ -1,5 +1,5 @@
 import { Fragment } from 'react';
-import Routes from './Routes/Routes';
+import MovieRoutes from './Routes/MovieRoutes';
 import './Styles/main.scss';
 import './Styles/loader.scss';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -11,7 +11,7 @@ function App() {
     <Fragment>
       <Router>
         <Navbar />
-        <Routes />
+        <MovieRoutes />
       </Router>
       <Footer />
     </Fragment>

@@ -2,10 +2,10 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 
 const fetchSearchedMovie = createAsyncThunk(
   'movie-search/FETCH_SEARCH',
-  async (movieName, thunkAPI) => {
+  async (movie, thunkAPI) => {
     try {
       const getSearchMovie = await fetch(
-        `https://api.themoviedb.org/3/search/movie?language=en-US&query=${movieName}&page=1&include_adult=false
+        `https://api.themoviedb.org/3/search/movie?language=en-US&query=${movie.title}&page=${movie.page}&include_adult=false
     `,
         {
           signal: thunkAPI.signal,
@@ -43,12 +43,19 @@ const searchSlice = createSlice({
     isLoading: false,
     searchedValue: '',
     searchedMovie: [],
+    first_list: 1,
+    current_page: 1,
+    totalPage: null,
+    total_list_displayed: 4,
+    TMDB_MAX_PAGINATION: 500,
   },
   reducers: {
     resetState: (state) => {
       state.isLoading = false;
       state.searchedValue = '';
       state.searchedMovie = [];
+      state.totalPage = null;
+      state.current_page = 1;
     },
     setSearchValue: (state, action) => {
       state.searchedValue = action.payload.name;
@@ -65,6 +72,8 @@ const searchSlice = createSlice({
     [fetchSearchedMovie.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.searchedMovie = action.payload.movie.results;
+      state.totalPage = action.payload.movie.total_pages > state.TMDB_MAX_PAGINATION ? state.TMDB_MAX_PAGINATION : action.payload.movie.total_pages;
+      state.current_page = action.payload.movie.page;
     },
   },
 });

@@ -27,7 +27,7 @@ const Menus = () => {
         </li>
         <GenresList genres={genres} />
         <li className='nav-list'>
-          <Link className='nav-link' to='/actors' onClick={handleCloseMenus}>
+          <Link className='nav-link' to='/actors?page=1' onClick={handleCloseMenus}>
             People
           </Link>
         </li>

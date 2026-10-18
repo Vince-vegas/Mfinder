@@ -9,29 +9,40 @@ import {
   onResetState,
 } from '../Store/NavSearch/searchReducer';
 import '../Styles/genres-layout.scss';
+import { useSearchParams } from 'react-router-dom';
+import PagePagination from '../Components/Pagination/PagePagination';
 
-const MovieSearched = (props) => {
+const MovieSearched = () => {
   // get query
-  const query = new URLSearchParams(props.location.search);
-  const titleQuery = query.get('q').trim();
+  const [searchParams, setSearchParams] = useSearchParams()
+  const titleQuery = searchParams.get("q").trim()
+  const page = Number(searchParams.get("page"))
   //
 
   const movieSearchState = useSelector((state) => state.movieSearched);
   const dispatch = useDispatch();
 
-  const { searchedValue, searchedMovie, isLoading } = movieSearchState;
+  const { searchedValue, searchedMovie, isLoading, totalPage, total_list_displayed, first_list, current_page } = movieSearchState;
 
   useEffect(() => {
-    const promSearched = dispatch(fetchSearchedMovie(titleQuery));
+    const promSearched = dispatch(fetchSearchedMovie({title: titleQuery, page }));
 
     // abort fetch when unmount
     return () => {
       promSearched.abort();
     };
-  }, [searchedValue, titleQuery]);
+  }, [searchedValue, titleQuery, page]);
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [current_page])
 
   // reset the state when unmount
   useEffect(() => {
+    if(page <= 0 || !page) {
+      setSearchParams({q: titleQuery, page: 1})
+    }
+
     return () => {
       dispatch(onResetState());
     };
@@ -56,6 +67,7 @@ const MovieSearched = (props) => {
         {isLoading && <PageLoad />}
 
         <CollectMovies moviesArray={searchedMovie} />
+        <PagePagination page={page} current_page={current_page} first_list={first_list} total_list_displayed={total_list_displayed} totalPage={totalPage} />
       </div>
     </div>
   );
