@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { onSortLatest, onSortPopular, onSortRated } from '../Store/movies/moviesReducer'
 
 const SortMoviesUI = () => {
-  const [_, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams()
   const moviesContext = useSelector((state) => state.moviesState);
   const dispatch = useDispatch()
 

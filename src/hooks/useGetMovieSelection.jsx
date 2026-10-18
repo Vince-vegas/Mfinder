@@ -58,7 +58,7 @@ export const useGetMovieSelection = () => {
     return () => {
       handleSearchDebounce.cancel()
     }
-  }, [searchVal])
+  }, [searchVal, handleSearchDebounce])
 
   const resetSearching = () => {
     handleSearchDebounce.cancel()

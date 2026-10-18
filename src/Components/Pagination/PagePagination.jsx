@@ -4,7 +4,7 @@ import { genPaginationRange } from '../../Utils/genPaginationRange';
 import { useSearchParams } from 'react-router-dom';
 
 const PagePagination = ({page, current_page, totalPage, total_list_displayed, first_list }) => {
-  const [_, setSearchParams] = useSearchParams()
+  const [, setSearchParams] = useSearchParams()
 
   const { start, end } = genPaginationRange(current_page, totalPage, total_list_displayed)
 
