@@ -489,6 +489,16 @@
   display: block;
 }
 
+@media screen and (max-width: 500px) {
+  .genres-list {
+    li {
+      &:nth-child(n + 3) {
+        display: none;
+      }
+    }
+  }
+}
+
 @media screen and (min-width: 992px) {
   .show-search {
     display: none;
