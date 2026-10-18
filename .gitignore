@@ -11,8 +11,6 @@
 # production
 /build
 
-/src/Routes
-
 # misc
 .DS_Store
 .env.local
