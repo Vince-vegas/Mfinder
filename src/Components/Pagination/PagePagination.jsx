@@ -1,12 +1,24 @@
+import { useEffect, useState } from 'react';
 import '../../Styles/pagination.scss';
 import { genPaginationArray } from '../../Utils/genPaginationArray';
 import { genPaginationRange } from '../../Utils/genPaginationRange';
 import { useSearchParams } from 'react-router-dom';
 
 const PagePagination = ({page, current_page, totalPage, total_list_displayed, first_list }) => {
+  const [isMobile, setIsMobile] = useState(false)
   const [, setSearchParams] = useSearchParams()
 
-  const { start, end } = genPaginationRange(current_page, totalPage, total_list_displayed)
+  const displayedCount = isMobile ? 3 : total_list_displayed;
+
+  const { start, end } = genPaginationRange(current_page, totalPage, displayedCount)
+
+   useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 500px)').matches;
+  
+    if(mediaQuery) {
+      setIsMobile(true)
+    }
+  }, []);
 
   const handleSetPage = (id) => {
     setSearchParams((params) => {

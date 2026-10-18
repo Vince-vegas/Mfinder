@@ -77,15 +77,31 @@
   }
 }
 
-@media screen and (max-width: 550px) {
+@media screen and (max-width: 768px) {
   .pgn-menu {
     .pgn-list-handler {
-      margin: 0 10px;
-      
       .text {
         display: none;
       }
+    }
+  }
+}
 
+@media screen and (max-width: 500px) {
+  .pgn-menu {
+    .pgn-list {
+      margin: 0;
+
+      .pgn-link {
+        max-width: 45px;
+      }
+
+      .icon-left, .icon-right {
+        right: 7px;
+      }
+    }
+
+    .pgn-list-handler {
       .icon-left, .icon-right {
         margin: 0!important;
       }
