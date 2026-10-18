@@ -56,7 +56,7 @@ const Actors = () => {
       {/* Show Spinner when fetching */}
       {isLoading && <PageLoad />}
 
-      {actors.length && <PagePagination page={page} current_page={current_page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} />}
+      {!!actors && actors.length > 0 && <PagePagination page={page} current_page={current_page} first_list={first_list} totalPage={totalPage} total_list_displayed={total_list_displayed} />}
     </div>
   );
 };
