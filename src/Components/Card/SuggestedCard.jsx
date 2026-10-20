@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import Observer from '@researchgate/react-intersection-observer';
-import Fade from 'react-reveal/Fade';
 
 const SuggestedCard = ({ poster_path, title, id }) => {
   const handleChange = (entry, unobserve) => {
@@ -12,20 +11,18 @@ const SuggestedCard = ({ poster_path, title, id }) => {
   };
 
   return (
-    <Fade>
-      <div className="w-50 mv-item mb30">
-        <Link to={`/title/${id}`} className="mv-link">
-          <div className="mv-image">
-            <Observer onChange={handleChange}>
-              <img
-                alt={title}
-                data-image={`https://image.tmdb.org/t/p/w300${poster_path}`}
-              />
-            </Observer>
-          </div>
-        </Link>
-      </div>
-    </Fade>
+    <div className="w-50 mv-item mb30">
+      <Link to={`/title/${id}`} className="mv-link">
+        <div className="mv-image">
+          <Observer onChange={handleChange}>
+            <img
+              alt={title}
+              data-image={`https://image.tmdb.org/t/p/w300${poster_path}`}
+            />
+          </Observer>
+        </div>
+      </Link>
+    </div>
   );
 };
 
