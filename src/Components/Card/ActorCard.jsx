@@ -1,26 +1,43 @@
-import React from 'react';
+import React, { useRef, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import Observer from '@researchgate/react-intersection-observer';
 
 const ActorCard = ({ name, profile_path, movieId }) => {
-  const handleChange = (entry, unobserve) => {
-    if (entry.isIntersecting) {
-      entry.target.setAttribute('src', entry.target.dataset.image);
-      unobserve();
-    }
-  };
+  const cardRef = useRef(null)
+
+  useEffect(() => {
+    const card = cardRef.current
+
+    if(!card) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      const entry = entries[0]
+
+      if(entry.isIntersecting) {
+        // allow react to know if visible (use usestate) is better practice
+        // for simple animation, modify direct dom is ok
+        card.classList.add("visible")
+        observer.unobserve(card)
+      }
+    }, {
+      threshold: 0.1,
+    })
+
+    observer.observe(card)
+
+    return () => observer.disconnect()
+  }, [])
 
   return (
-    <div className='actor-item mb30'>
+    <div className='actor-item mb30 fade-in' ref={cardRef}>
       <Link to={`/actor/movies/${movieId}`} className='actor-link'>
         <div className='actor-box'>
           <div className='actor-image'>
-            <Observer onChange={handleChange}>
-              <img
-                alt={name}
-                data-image={`https://image.tmdb.org/t/p/w300${profile_path}`}
-              />
-            </Observer>
+            <img
+              decoding="async"
+              loading='lazy'
+              alt={name}
+              src={`https://image.tmdb.org/t/p/w300${profile_path}`}
+            />
           </div>
           <div className='sub-content'>
             <h3>{name}</h3>
