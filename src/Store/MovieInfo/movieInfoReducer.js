@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import axios from 'axios';
+import { fetchData } from '../../Utils/fetchData';
 
 const fetchMovieDetails = createAsyncThunk(
   'movie/FETCH_DETAILS',
@@ -8,73 +8,30 @@ const fetchMovieDetails = createAsyncThunk(
       // scroll to top when mount
       window.scrollTo(0, 0);
       // Movie Details
-      const getDetail = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}?language=en-US`,
-        {
-          signal: thunkAPI.signal,
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-        }
-      );
-      const detailData = await getDetail.json();
+      const id = detailObj.id
 
-      // Youtube Trailer Key
-      const getTrailerKey = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/videos?language=en-US
-    `,
-        {
-          signal: thunkAPI.signal,
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-        }
-      );
-      const trailerKey = await getTrailerKey.json();
+      const [details, trailer, people, reviews] = await Promise.all([
+        fetchData(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, thunkAPI),
+        fetchData(`https://api.themoviedb.org/3/movie/${id}/videos?language=en-US`, thunkAPI),
+        fetchData(`https://api.themoviedb.org/3/movie/${id}/credits`, thunkAPI),
+        fetchData(`https://api.themoviedb.org/3/movie/${id}/reviews`, thunkAPI)
+      ])
 
-      // People at Movie
-      const getPeople = await fetch(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/credits
-    `,
-        {
-          signal: thunkAPI.signal,
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-        }
-      );
-      const movieActors = await getPeople.json();
-
-      // when a movie has no trailer key add trailerKey a string of no-trailer-key
-      if (trailerKey.results.length < 1) {
-        trailerKey.results.push({ key: 'no-trailer-key' });
+      // when a movie has no trailer key add trailer key a string of no-trailer-key
+      if (trailer.results.length < 1) {
+        trailer.results.push({ key: 'no-trailer-key' });
       }
 
-      // movie reviews
-      const getReviews = await axios(
-        `https://api.themoviedb.org/3/movie/${detailObj.id}/reviews`
-        , {
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-        }
-      );
-      const reviewData = await getReviews.data;
-
       return {
-        details: detailData,
-        trailerKey: trailerKey.results[trailerKey.results.length - 1].key,
-        movieActors: movieActors.cast,
-        movieId: detailObj.id,
-        movieCollection: detailData?.belongs_to_collection,
-        reviews: reviewData.results,
+        details: details,
+        trailerKey: trailer.results[trailer.results.length - 1].key,
+        movieActors: people.cast,
+        movieId: id,
+        movieCollection: details?.belongs_to_collection,
+        reviews: reviews.results,
       };
     } catch (error) {
-      throw new Error('404', error);
+      console.error(error)
     }
   }
 );

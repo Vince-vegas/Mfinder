@@ -1,40 +1,21 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { fetchData } from '../../Utils/fetchData';
 
 const fetchActorMovies = createAsyncThunk(
   'actorMovies/FETCH_MOVIES',
   async (collectionId, thunkAPI) => {
     try {
-      const onFetchMovies = await fetch(
-        `https://api.themoviedb.org/3/person/${collectionId}/movie_credits?language=en-US`,
-        { 
-          signal: thunkAPI.signal,
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-         }
-      );
-      const moviesData = await onFetchMovies.json();
-
-      const onFetchActorDetail = await fetch(
-        `https://api.themoviedb.org/3/person/${collectionId}?language=en-US`,
-        { 
-          signal: thunkAPI.signal,
-          headers: {
-            'Content-type': 'application/json',
-            'Authorization': `Bearer ${process.env.REACT_APP_TMDB_ID_AUTHORIZATION}`,
-          }
-         }
-      );
-      const actorDetailData = await onFetchActorDetail.json();
+      const [movies, actor] = await Promise.all([
+        fetchData(`https://api.themoviedb.org/3/person/${collectionId}/movie_credits?language=en-US`, thunkAPI),
+        fetchData(`https://api.themoviedb.org/3/person/${collectionId}?language=en-US`, thunkAPI)
+      ])
 
       return {
-        movies: moviesData.cast,
-        actorDetails: actorDetailData,
+        movies: movies.cast,
+        actorDetails: actor,
       };
     } catch (error) {
-      console.log(error);
-      throw new Error('error fetching', error);
+      console.error(error);
     }
   }
 );
